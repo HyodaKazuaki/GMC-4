@@ -15,6 +15,8 @@ namespace GMC_4
         public Form1()
         {
             InitializeComponent();
+
+            setMemoryText();
         }
 
         private void buttonINCR_Click(object sender, EventArgs e)
@@ -38,14 +40,14 @@ namespace GMC_4
 
         private void openFileOToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(openFileDialog1.ShowDialog() != DialogResult.OK)
+            if (openFileDialog1.ShowDialog() != DialogResult.OK)
             {
                 return;
             }
 
             FileName = openFileDialog1.FileName;
 
-            using(StreamReader sr = new StreamReader(openFileDialog1.FileName, Encoding.UTF8))
+            using (StreamReader sr = new StreamReader(openFileDialog1.FileName, Encoding.UTF8))
             {
                 sourceCodeBox.Text = sr.ReadToEnd();
             }
@@ -58,11 +60,43 @@ namespace GMC_4
                     return;
                 else
                     FileName = saveFileDialog1.FileName;
+            var file = new File();
+            file.Write(sourceCodeBox.Text);
+        }
 
-            using (StreamWriter sw = new StreamWriter(FileName))
+        void setMemoryText()
+        {
+            var memory = Program.getMemory();
+            memoryText.Text = new string(memory);
+        }
+
+        private void assembleButton_Click(object sender, EventArgs e)
+        {
+            var compiler = new Compiler(sourceCodeBox.Text);
+            compiler.Compile();
+
+            setMemoryText();
+        }
+
+        int r_address;
+        private void runButton_Click(object sender, EventArgs e)
+        {
+            r_address = 0;
+            timer1.Start();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            var memory = Program.getMemory();
+            if(memory[r_address] == '0')
             {
-                sw.Write(sourceCodeBox.Text);
+                // KA
             }
+        }
+
+        private void resetButton_Click(object sender, EventArgs e)
+        {
+            timer1.Stop();
         }
     }
 }

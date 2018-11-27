@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.buttonINCR = new System.Windows.Forms.Button();
             this.SegmentLED0 = new System.Windows.Forms.PictureBox();
             this.SegmentLED01 = new System.Windows.Forms.PictureBox();
@@ -47,9 +48,14 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileOToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.memoryText = new System.Windows.Forms.TextBox();
+            this.assembleButton = new System.Windows.Forms.Button();
+            this.runButton = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.resetButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.SegmentLED0)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SegmentLED01)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SegmentLED2)).BeginInit();
@@ -70,7 +76,7 @@
             // buttonINCR
             // 
             this.buttonINCR.Font = new System.Drawing.Font("Gill Sans MT", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonINCR.Location = new System.Drawing.Point(675, 67);
+            this.buttonINCR.Location = new System.Drawing.Point(687, 65);
             this.buttonINCR.Name = "buttonINCR";
             this.buttonINCR.Size = new System.Drawing.Size(101, 35);
             this.buttonINCR.TabIndex = 0;
@@ -81,7 +87,7 @@
             // SegmentLED0
             // 
             this.SegmentLED0.BackColor = System.Drawing.Color.Black;
-            this.SegmentLED0.Location = new System.Drawing.Point(241, 81);
+            this.SegmentLED0.Location = new System.Drawing.Point(301, 89);
             this.SegmentLED0.Name = "SegmentLED0";
             this.SegmentLED0.Size = new System.Drawing.Size(82, 19);
             this.SegmentLED0.TabIndex = 1;
@@ -90,7 +96,7 @@
             // SegmentLED01
             // 
             this.SegmentLED01.BackColor = System.Drawing.Color.Black;
-            this.SegmentLED01.Location = new System.Drawing.Point(329, 100);
+            this.SegmentLED01.Location = new System.Drawing.Point(389, 108);
             this.SegmentLED01.Name = "SegmentLED01";
             this.SegmentLED01.Size = new System.Drawing.Size(19, 82);
             this.SegmentLED01.TabIndex = 2;
@@ -99,7 +105,7 @@
             // SegmentLED2
             // 
             this.SegmentLED2.BackColor = System.Drawing.Color.Black;
-            this.SegmentLED2.Location = new System.Drawing.Point(329, 197);
+            this.SegmentLED2.Location = new System.Drawing.Point(389, 205);
             this.SegmentLED2.Name = "SegmentLED2";
             this.SegmentLED2.Size = new System.Drawing.Size(19, 82);
             this.SegmentLED2.TabIndex = 3;
@@ -108,7 +114,7 @@
             // SegmentLED3
             // 
             this.SegmentLED3.BackColor = System.Drawing.Color.Black;
-            this.SegmentLED3.Location = new System.Drawing.Point(241, 280);
+            this.SegmentLED3.Location = new System.Drawing.Point(301, 288);
             this.SegmentLED3.Name = "SegmentLED3";
             this.SegmentLED3.Size = new System.Drawing.Size(82, 19);
             this.SegmentLED3.TabIndex = 4;
@@ -117,7 +123,7 @@
             // SegmentLED4
             // 
             this.SegmentLED4.BackColor = System.Drawing.Color.Black;
-            this.SegmentLED4.Location = new System.Drawing.Point(216, 197);
+            this.SegmentLED4.Location = new System.Drawing.Point(276, 205);
             this.SegmentLED4.Name = "SegmentLED4";
             this.SegmentLED4.Size = new System.Drawing.Size(19, 82);
             this.SegmentLED4.TabIndex = 5;
@@ -126,7 +132,7 @@
             // SegmentLED5
             // 
             this.SegmentLED5.BackColor = System.Drawing.Color.Black;
-            this.SegmentLED5.Location = new System.Drawing.Point(216, 100);
+            this.SegmentLED5.Location = new System.Drawing.Point(276, 108);
             this.SegmentLED5.Name = "SegmentLED5";
             this.SegmentLED5.Size = new System.Drawing.Size(19, 82);
             this.SegmentLED5.TabIndex = 6;
@@ -135,7 +141,7 @@
             // SegmentLED6
             // 
             this.SegmentLED6.BackColor = System.Drawing.Color.Black;
-            this.SegmentLED6.Location = new System.Drawing.Point(241, 179);
+            this.SegmentLED6.Location = new System.Drawing.Point(301, 187);
             this.SegmentLED6.Name = "SegmentLED6";
             this.SegmentLED6.Size = new System.Drawing.Size(82, 19);
             this.SegmentLED6.TabIndex = 7;
@@ -212,7 +218,7 @@
             this.sourceCodeBox.Location = new System.Drawing.Point(12, 55);
             this.sourceCodeBox.Multiline = true;
             this.sourceCodeBox.Name = "sourceCodeBox";
-            this.sourceCodeBox.Size = new System.Drawing.Size(153, 383);
+            this.sourceCodeBox.Size = new System.Drawing.Size(211, 311);
             this.sourceCodeBox.TabIndex = 15;
             // 
             // menuStrip1
@@ -237,26 +243,74 @@
             // openFileOToolStripMenuItem
             // 
             this.openFileOToolStripMenuItem.Name = "openFileOToolStripMenuItem";
-            this.openFileOToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openFileOToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.openFileOToolStripMenuItem.Text = "開く (&O)";
             this.openFileOToolStripMenuItem.Click += new System.EventHandler(this.openFileOToolStripMenuItem_Click);
+            // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.saveToolStripMenuItem.Text = "上書き保存 (&S)";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // saveToolStripMenuItem
+            // memoryText
             // 
-            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.saveToolStripMenuItem.Text = "上書き保存 (&S)";
-            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
+            this.memoryText.Location = new System.Drawing.Point(12, 419);
+            this.memoryText.Name = "memoryText";
+            this.memoryText.Size = new System.Drawing.Size(776, 19);
+            this.memoryText.TabIndex = 17;
+            // 
+            // assembleButton
+            // 
+            this.assembleButton.Font = new System.Drawing.Font("Gill Sans MT", 12F);
+            this.assembleButton.Location = new System.Drawing.Point(44, 372);
+            this.assembleButton.Name = "assembleButton";
+            this.assembleButton.Size = new System.Drawing.Size(153, 35);
+            this.assembleButton.TabIndex = 18;
+            this.assembleButton.Text = "Assemble";
+            this.assembleButton.UseVisualStyleBackColor = true;
+            this.assembleButton.Click += new System.EventHandler(this.assembleButton_Click);
+            // 
+            // runButton
+            // 
+            this.runButton.Font = new System.Drawing.Font("Gill Sans MT", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.runButton.Location = new System.Drawing.Point(687, 126);
+            this.runButton.Name = "runButton";
+            this.runButton.Size = new System.Drawing.Size(101, 35);
+            this.runButton.TabIndex = 19;
+            this.runButton.Text = "RUN";
+            this.runButton.UseVisualStyleBackColor = true;
+            this.runButton.Click += new System.EventHandler(this.runButton_Click);
+            // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // resetButton
+            // 
+            this.resetButton.Font = new System.Drawing.Font("Gill Sans MT", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.resetButton.Location = new System.Drawing.Point(687, 187);
+            this.resetButton.Name = "resetButton";
+            this.resetButton.Size = new System.Drawing.Size(101, 35);
+            this.resetButton.TabIndex = 20;
+            this.resetButton.Text = "RESET";
+            this.resetButton.UseVisualStyleBackColor = true;
+            this.resetButton.Click += new System.EventHandler(this.resetButton_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.resetButton);
+            this.Controls.Add(this.runButton);
+            this.Controls.Add(this.assembleButton);
+            this.Controls.Add(this.memoryText);
             this.Controls.Add(this.sourceCodeBox);
             this.Controls.Add(this.binaryLED6);
             this.Controls.Add(this.binaryLED5);
@@ -322,6 +376,11 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
+        private System.Windows.Forms.TextBox memoryText;
+        private System.Windows.Forms.Button assembleButton;
+        private System.Windows.Forms.Button runButton;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Button resetButton;
     }
 }
 

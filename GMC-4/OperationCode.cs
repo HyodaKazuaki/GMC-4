@@ -45,24 +45,38 @@ namespace GMC_4
             {"JUMP", 'E' }
         };
 
+        /// <summary>
+        /// オペコードを機械語に変換します。
+        /// </summary>
+        /// <param name="operationCode">オペコード</param>
+        /// <returns>機械語</returns>
         public static int addOperationCode(string operationCode)
         {
             return operationCodeToAddress[operationCode];
         }
 
+        /// <summary>
+        /// アセンブリコードを変換しメモリに書き込みます。s
+        /// </summary>
+        /// <param name="operationCode">オペコード</param>
+        /// <param name="operand">オペランド</param>
         public static void compileOperationCode(string operationCode, string operand)
         {
+            // 命令がない場合は飛ばす
+            if (operationCode == "")
+                return;
+            // オペコードを変換
             var code = operationCodeToInstructionCode[operationCode];
-            Program.setMemory(code, Address.getAddress());
+            Memory.setMemory(code, Address.getAddress());
             Address.incrementAddress();
             if ('8' <= code && code <= 'F')
             {
-                Program.setMemory(operand[0], Address.getAddress());
+                Memory.setMemory(operand[0], Address.getAddress());
                 Address.incrementAddress();
             }
             if(code == 'F')
             {
-                Program.setMemory(operand[1], Address.getAddress());
+                Memory.setMemory(operand[1], Address.getAddress());
                 Address.incrementAddress();
             }
         }

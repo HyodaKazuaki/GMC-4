@@ -2,38 +2,32 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 
 namespace GMC_4
 {
     static class Program
     {
-        private static char[] memory = new char[97];
-        public static List<Label> labelList = new List<Label>();
-
         /// <summary>
         /// アプリケーションのメイン エントリ ポイントです。
         /// </summary>
         [STAThread]
         static void Main()
         {
-            memory = (new char[97]).Select(v => 'F').ToArray();
-            memory[memory.Length - 1] = '\0';
+            Memory.resetMemory();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
         }
 
-        public static char[] getMemory()
+        /// <summary>
+        /// 文字が16進数か判定します。
+        /// </summary>
+        /// <param name="character">判定したい文字</param>
+        /// <returns>判定結果</returns>
+        public static bool IsHex(char character)
         {
-            return memory;
-        }
-
-        public static void setMemory(char data, int address)
-        {
-            if(data >= '0' && data <= 'F')
-            {
-                memory[address] = data;
-            }
+            return Regex.IsMatch(character.ToString(), "[0-9a-fA-F]");
         }
     }
 }

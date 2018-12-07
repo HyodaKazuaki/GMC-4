@@ -12,16 +12,36 @@ namespace GMC_4
         private int startLine = 0;
         private int labelAddress = 0;
 
+        /// <summary>
+        /// ソースコードをコンパイルするためにソースコードを受け取ります。
+        /// </summary>
+        /// <param name="source">ソースコード</param>
         public Compiler(string source)
         {
+            // 行ごとに分割
             sourceCode = source.Split(new String[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+            // 不要なコメントを除去
+            sourceCode = sourceCode.Select(code => removeComment(code)).ToArray();
         }
 
+        /// <summary>
+        /// ソースコードをコンパイルします。
+        /// </summary>
         public void Compile()
         {
             getStartLine();
             addLabel();
             compileOperation();
+        }
+
+        /// <summary>
+        /// コードのコメントを除去します。
+        /// </summary>
+        /// <param name="code">コメントを含む1行のコード</param>
+        /// <returns>コメントを取り除いた1行のコード</returns>
+        private string removeComment(string code)
+        {
+            return code.Split(new char[] { ';' })[0];
         }
 
         /// <summary>
@@ -47,18 +67,20 @@ namespace GMC_4
         private void addLabel()
         {
             string operationCode = "";
-            foreach (var line in sourceCode.Select((value, index) => new { value, index }))
+            //foreach (var line in sourceCode.Select((value, index) => new { value, index }))
+            for(int i = startLine + 1; i < sourceCode.Length; i++)
             {
-                string[] term = line.value.Split(del, StringSplitOptions.RemoveEmptyEntries);
+                var value = sourceCode[i];
+                string[] term = value.Split(del, StringSplitOptions.RemoveEmptyEntries);
 
-                if (line.value.IndexOf(term[0]) == 0)
+                if (value.IndexOf(term[0]) == 0)
                 {
                     // ラベル追加
-                    Program.labelList.Add(new Label(term[0], labelAddress));
+                    Memory.labelList.Add(new Label(term[0], labelAddress));
                     // オペコードは第二引数部
                     operationCode = term[1];
                 }
-                else if (term[0] == "END" && line.value.IndexOf(term[0]) != 0)
+                else if (term[0] == "END" && value.IndexOf(term[0]) != 0)
                 {
                     // 終了
                     break;
@@ -83,14 +105,19 @@ namespace GMC_4
             string operand = "";
             Address.setAddress(0);
 
-            for(int i = startLine; i < sourceCode.Length; i++)
+            for(int i = startLine + 1; i < sourceCode.Length; i++)
             {
+                // オペコードとオペランドを初期化
+                operationCode = "";
+                operand = "";
+
+                // 1行分取得
                 var line = sourceCode[i];
                 string[] term = line.Split(del, StringSplitOptions.RemoveEmptyEntries);
                 
                 if (line.IndexOf(term[0]) == 0)
                 {
-                    // ラベル付き
+                    // ラベル付き(term[0]はラベル)
                     operationCode = term[1];
                     if (term.Length >= 3)
                         // オペランド付き

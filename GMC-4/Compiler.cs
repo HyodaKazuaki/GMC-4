@@ -103,7 +103,7 @@ namespace GMC_4
         {
             string operationCode = "";
             string operand = "";
-            Address.setAddress(0);
+            Address.set(0);
 
             for(int i = startLine + 1; i < sourceCode.Length; i++)
             {

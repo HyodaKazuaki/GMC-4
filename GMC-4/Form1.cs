@@ -16,15 +16,19 @@ namespace GMC_4
         {
             InitializeComponent();
 
+            Simulator.form1 = this;
+
             setMemoryText();
         }
 
         private void buttonINCR_Click(object sender, EventArgs e)
         {
-            Address.incrementAddress();
+            if(Buffer.Flag) Memory.set(Buffer.get(), Address.get());
+            Address.increment();
             setBinaryLED();
             setMemoryText();
-            setLEDMatrix(Memory.getMemory()[Address.getAddress()]);
+            setLEDMatrix(Memory.get()[Address.get()]);
+            Buffer.reset();
         }
 
         private void buttonNumber_Click(object sender, EventArgs e)
@@ -33,22 +37,21 @@ namespace GMC_4
             var buttonNumberString = button.Name.Replace("button", "");
             var buttonNumber = char.Parse(buttonNumberString);
             setLEDMatrix(buttonNumber);
-
-            Memory.setMemory(buttonNumber, Address.getAddress());
+            Buffer.set(buttonNumber);
         }
 
         private void setBinaryLED()
         {
-            binaryLED0.BackColor = ((Address.getAddress() & 0b0000001) == 0b0000001) ? Color.Red : Color.Black;
-            binaryLED1.BackColor = ((Address.getAddress() & 0b0000010) == 0b0000010) ? Color.Red : Color.Black;
-            binaryLED2.BackColor = ((Address.getAddress() & 0b0000100) == 0b0000100) ? Color.Red : Color.Black;
-            binaryLED3.BackColor = ((Address.getAddress() & 0b0001000) == 0b0001000) ? Color.Red : Color.Black;
-            binaryLED4.BackColor = ((Address.getAddress() & 0b0010000) == 0b0010000) ? Color.Red : Color.Black;
-            binaryLED5.BackColor = ((Address.getAddress() & 0b0100000) == 0b0100000) ? Color.Red : Color.Black;
-            binaryLED6.BackColor = ((Address.getAddress() & 0b1000000) == 0b1000000) ? Color.Red : Color.Black;
+            binaryLED0.BackColor = ((Address.get() & 0b0000001) == 0b0000001) ? Color.Red : Color.Black;
+            binaryLED1.BackColor = ((Address.get() & 0b0000010) == 0b0000010) ? Color.Red : Color.Black;
+            binaryLED2.BackColor = ((Address.get() & 0b0000100) == 0b0000100) ? Color.Red : Color.Black;
+            binaryLED3.BackColor = ((Address.get() & 0b0001000) == 0b0001000) ? Color.Red : Color.Black;
+            binaryLED4.BackColor = ((Address.get() & 0b0010000) == 0b0010000) ? Color.Red : Color.Black;
+            binaryLED5.BackColor = ((Address.get() & 0b0100000) == 0b0100000) ? Color.Red : Color.Black;
+            binaryLED6.BackColor = ((Address.get() & 0b1000000) == 0b1000000) ? Color.Red : Color.Black;
         }
 
-        private void setLEDMatrix(char character)
+        public void setLEDMatrix(char character)
         {
             SegmentLED0.BackColor = new Char[] { '0', '2', '3', '5', '6', '7', '8', '9', 'A', 'C', 'E', 'F' }.Any(c => c == character) ? Color.Red : Color.Black;
             SegmentLED1.BackColor = new Char[] { '0', '1', '2', '3', '4', '7', '8', '9', 'A', 'C',　'D' }.Any(c => c == character) ? Color.Red : Color.Black;
@@ -89,12 +92,13 @@ namespace GMC_4
 
         void setMemoryText()
         {
-            var memory = Memory.getMemory();
+            var memory = Memory.get();
             memoryText.Text = new string(memory);
         }
 
         private void assembleButton_Click(object sender, EventArgs e)
         {
+            Program.reset();
             var compiler = new Compiler(sourceCodeBox.Text);
             compiler.Compile();
 
@@ -110,18 +114,23 @@ namespace GMC_4
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            var memory = Memory.getMemory();
-            if(memory[r_address] == '0')
-            {
-                setLEDMatrix(Memory.ARegister);
-            }
+            // バッファのリセット
+            Buffer.reset();
+            // アドレスをスタートへ
+            Address.set(0);
+            Simulator.execute();
 
-            Address.incrementAddress();
+            Address.increment();
         }
 
         private void resetButton_Click(object sender, EventArgs e)
         {
             timer1.Stop();
+        }
+
+        private void addressSetButton_Click(object sender, EventArgs e)
+        {
+            Address.set(Buffer.getAsAddress());
         }
     }
 }

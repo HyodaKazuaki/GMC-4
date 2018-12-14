@@ -42,7 +42,7 @@ namespace GMC_4
             {"AIY", 'B' },
             {"CIA", 'C' },
             {"CIY", 'D' },
-            {"JUMP", 'E' }
+            {"JUMP", 'F' }
         };
 
         /// <summary>
@@ -67,17 +67,17 @@ namespace GMC_4
                 return;
             // オペコードを変換
             var code = operationCodeToInstructionCode[operationCode];
-            Memory.setMemory(code, Address.getAddress());
-            Address.incrementAddress();
+            Memory.set(code, Address.get());
+            Address.increment();
             if ('8' <= code && code <= 'F')
             {
-                Memory.setMemory(operand[0], Address.getAddress());
-                Address.incrementAddress();
+                Memory.set(operand[0], Address.get());
+                Address.increment();
             }
             if(code == 'F')
             {
-                Memory.setMemory(operand[1], Address.getAddress());
-                Address.incrementAddress();
+                Memory.set(operand[1], Address.get());
+                Address.increment();
             }
         }
     }

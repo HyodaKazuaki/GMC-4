@@ -19,7 +19,7 @@ namespace GMC_4
         public Compiler(string source)
         {
             // 行ごとに分割
-            sourceCode = source.Split(new String[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+            sourceCode = source.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
             // 不要なコメントを除去
             sourceCode = sourceCode.Select(code => removeComment(code)).ToArray();
         }
@@ -67,7 +67,6 @@ namespace GMC_4
         private void addLabel()
         {
             string operationCode = "";
-            //foreach (var line in sourceCode.Select((value, index) => new { value, index }))
             for(int i = startLine + 1; i < sourceCode.Length; i++)
             {
                 var value = sourceCode[i];
@@ -103,7 +102,8 @@ namespace GMC_4
         {
             string operationCode = "";
             string operand = "";
-            Address.set(0);
+            Address.reset();
+            OperationCode.resetDataMemoryAddress();
 
             for(int i = startLine + 1; i < sourceCode.Length; i++)
             {

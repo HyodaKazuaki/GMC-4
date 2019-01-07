@@ -7,6 +7,7 @@ namespace GMC_4
 {
     static class OperationCode
     {
+        private static int dataMemoryAddress = Program.HexToInt("50");
         private static Dictionary<string, int> operationCodeToAddress = new Dictionary<string, int>()
         {
             {"KA", 1 },
@@ -23,7 +24,9 @@ namespace GMC_4
             {"AIY", 2 },
             {"CIA", 2 },
             {"CIY", 2 },
-            {"JUMP", 3 }
+            {"JUMP", 3 },
+            {"DC", 1 },
+            {"RET", 3 }
         };
 
         private static Dictionary<string, char> operationCodeToInstructionCode = new Dictionary<string, char>()
@@ -42,7 +45,8 @@ namespace GMC_4
             {"AIY", 'B' },
             {"CIA", 'C' },
             {"CIY", 'D' },
-            {"JUMP", 'F' }
+            {"JUMP", 'F' },
+            {"RET", 'F' }
         };
 
         /// <summary>
@@ -56,7 +60,7 @@ namespace GMC_4
         }
 
         /// <summary>
-        /// アセンブリコードを変換しメモリに書き込みます。s
+        /// アセンブリコードを変換しメモリに書き込みます。
         /// </summary>
         /// <param name="operationCode">オペコード</param>
         /// <param name="operand">オペランド</param>
@@ -65,10 +69,17 @@ namespace GMC_4
             // 命令がない場合は飛ばす
             if (operationCode == "")
                 return;
+            // DC命令はオペランドを記憶する
+            if(operationCode == "DC")
+            {
+                storageValueToMemory(operand.First());
+                return;
+            }
             // オペコードを変換
             var code = operationCodeToInstructionCode[operationCode];
             Memory.set(code, Address.get());
             Address.increment();
+            if (operationCode == "RET") operand = "FF";
             if ('8' <= code && code <= 'F')
             {
                 Memory.set(operand[0], Address.get());
@@ -79,6 +90,20 @@ namespace GMC_4
                 Memory.set(operand[1], Address.get());
                 Address.increment();
             }
+        }
+
+        private static void storageValueToMemory(char value)
+        {
+            // データメモリのアドレスをアドレスとしてセット(バッファオーバーフローしたときの処理があるため)
+            Address.set(dataMemoryAddress);
+            Memory.set(value, Address.get());
+            Address.increment();
+            dataMemoryAddress = Address.get();
+        }
+
+        public static void resetDataMemoryAddress()
+        {
+            dataMemoryAddress = Program.HexToInt("50");
         }
     }
 }

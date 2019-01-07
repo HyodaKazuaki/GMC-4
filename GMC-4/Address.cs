@@ -7,27 +7,51 @@ namespace GMC_4
 {
     static class Address
     {
-        private static byte address = 0x00;
-        
-        public static byte get()
+        private static readonly int finalProgramAddress = Program.HexToInt("4F");
+        private static readonly int finalDataAddress = Program.HexToInt("5F");
+        private static readonly int finalMemoryAddress = Program.HexToInt("6F");
+        private static int address = Program.HexToInt("00");
+
+        public static int get()
         {
             return address;
         }
 
         public static void increment()
         {
-            address = (address == 0x7F) ? (byte)0 : (byte)++address;
+            address = (address == finalMemoryAddress) ? Program.HexToInt("00") : address + 1;
         }
 
         public static void decrement()
         {
-            address = (address == 0x00) ? (byte)0x7F : (byte)--address;
+            address = (address == finalMemoryAddress) ? Program.HexToInt("6F") : address - 1;
         }
 
-        public static void set(byte addr)
+        public static void set(int addr)
         {
-            if (0x7F <= addr && addr >= 0x0)
+            if (Program.HexToInt("00") <= addr && addr <= finalDataAddress)
                 address = addr;
+            else if (addr == Program.HexToInt("FF"))
+                address = finalProgramAddress; // "FFF"(アドレスFFへジャンプ)のような場合はプログラムの最終アドレスへ移動
+            else
+            {
+                Console.WriteLine("Out bounds " + addr);
+                throw new ArgumentException();
+            }
+        }
+
+        /// <summary>
+        /// アドレスがプログラムメモリの最後まで来たか判定します。
+        /// </summary>
+        /// <returns></returns>
+        public static bool isFinal()
+        {
+            return address == finalProgramAddress;
+        }
+
+        public static void reset()
+        {
+            address = Program.HexToInt("00");
         }
     }
 }

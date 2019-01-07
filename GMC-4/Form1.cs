@@ -19,6 +19,7 @@ namespace GMC_4
             Simulator.form1 = this;
 
             setMemoryText();
+            setLEDMatrix(Memory.getWord(Address.get()));
         }
 
         private void buttonINCR_Click(object sender, EventArgs e)
@@ -54,7 +55,7 @@ namespace GMC_4
         public void setLEDMatrix(char character)
         {
             SegmentLED0.BackColor = new Char[] { '0', '2', '3', '5', '6', '7', '8', '9', 'A', 'C', 'E', 'F' }.Any(c => c == character) ? Color.Red : Color.Black;
-            SegmentLED1.BackColor = new Char[] { '0', '1', '2', '3', '4', '7', '8', '9', 'A', 'C',　'D' }.Any(c => c == character) ? Color.Red : Color.Black;
+            SegmentLED1.BackColor = new Char[] { '0', '1', '2', '3', '4', '7', '8', '9', 'A', 'D' }.Any(c => c == character) ? Color.Red : Color.Black;
             SegmentLED2.BackColor = new Char[] { '0', '1', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'D' }.Any(c => c == character) ? Color.Red : Color.Black;
             SegmentLED3.BackColor = new Char[] { '0', '2', '3', '5', '6', '8', 'B', 'C', 'D', 'E' }.Any(c => c == character) ? Color.Red : Color.Black;
             SegmentLED4.BackColor = new Char[] { '0', '2', '6', '8', 'A', 'B', 'C', 'D', 'E', 'F' }.Any(c => c == character) ? Color.Red : Color.Black;
@@ -105,19 +106,17 @@ namespace GMC_4
             setMemoryText();
         }
 
-        int r_address;
         private void runButton_Click(object sender, EventArgs e)
         {
-            r_address = 0;
-            timer1.Start();
+            startSimulator();
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            // バッファのリセット
-            Buffer.reset();
-            // アドレスをスタートへ
-            Address.set(0);
+            Console.WriteLine("Address " + Address.get() + " Processing");
+            // プログラムの終了チェック
+            if (Address.isFinal()) stopSimulator();
+
             Simulator.execute();
 
             Address.increment();
@@ -125,12 +124,45 @@ namespace GMC_4
 
         private void resetButton_Click(object sender, EventArgs e)
         {
+            stopSimulator();
+        }
+
+        /// <summary>
+        /// シミュレータを起動します。
+        /// </summary>
+        public void startSimulator()
+        {
+            Console.WriteLine("Start Simulator");
+            Console.WriteLine(Memory.get());
+            // アドレスをスタートへ
+            Address.reset();
+            // バッファのリセット
+            Buffer.reset();
+            timer1.Start();
+        }
+
+        /// <summary>
+        /// シミュレータを停止します。
+        /// </summary>
+        public void stopSimulator()
+        {
             timer1.Stop();
+            Console.WriteLine("Stop Simulator");
         }
 
         private void addressSetButton_Click(object sender, EventArgs e)
         {
             Address.set(Buffer.getAsAddress());
+            setBinaryLED();
+            setLEDMatrix(Memory.getWord(Address.get()));
+        }
+
+        private void memoryResetButton_Click(object sender, EventArgs e)
+        {
+            Program.reset();
+            setMemoryText();
+            setBinaryLED();
+            setLEDMatrix(Memory.getWord(Address.get()));
         }
     }
 }

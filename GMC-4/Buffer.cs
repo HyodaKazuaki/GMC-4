@@ -44,6 +44,7 @@ namespace GMC_4
         public static byte getAsAddress()
         {
             string address = buffer[1].get().ToString() + buffer[0].get().ToString();
+            Console.WriteLine("Move to address " + address);
             return Convert.ToByte(address, 16);
         }
 
@@ -52,7 +53,7 @@ namespace GMC_4
         /// </summary>
         private static void shift()
         {
-            buffer[1].set(buffer[0].get());
+            buffer[1] = new Word(buffer[0].get());
         }
     }
 }

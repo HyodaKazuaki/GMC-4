@@ -7,7 +7,7 @@ namespace GMC_4
 {
     static class Memory
     {
-        private static char[] memory = new char[97];
+        private static char[] memory = new char[112];
         public static List<Label> labelList = new List<Label>();
 
         /// <summary>

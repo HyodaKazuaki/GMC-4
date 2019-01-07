@@ -20,9 +20,11 @@ namespace GMC_4
             char word = Memory.getWord(Address.get());
             char tmp;
             int value;
+            Console.WriteLine("Address " + Address.get() + " -> " + word);
             switch (word)
             {
                 case '0':
+                    Console.WriteLine("Input getting...");
                     if (Buffer.Flag)
                     {
                         Register.A = Buffer.get();
@@ -53,7 +55,7 @@ namespace GMC_4
                     Register.Flag = '1';
                     break;
                 case '4':
-                    Memory.set(Register.A, 50 + Convert.ToInt32(Register.Y.ToString(), 16));
+                    Memory.set(Register.A, Program.HexToInt("50") + Convert.ToInt32(Register.Y.ToString(), 16));
                     Register.Flag = '1';
                     break;
                 case '5':
@@ -139,13 +141,14 @@ namespace GMC_4
                         Register.Flag = '1';
                     break;
                 case 'F':
+                    Address.increment();
+                    value = Convert.ToInt32(Memory.getWord(Address.get()).ToString(), 16) * 16;
+                    Address.increment();
+                    value += Convert.ToInt32(Memory.getWord(Address.get()).ToString(), 16);
                     if (Register.Flag == '1')
                     {
-                        Address.increment();
-                        value = Convert.ToInt32(Memory.getWord(Address.get()).ToString(), 16) * 16;
-                        Address.increment();
-                        value += Convert.ToInt32(Memory.getWord(Address.get()).ToString(), 16);
                         Address.set(Convert.ToByte(value));
+                        Address.decrement(); // あとでインクリメントされるため予めデクリメントする
                     }
                     else
                         Register.Flag = '1';

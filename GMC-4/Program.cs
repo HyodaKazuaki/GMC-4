@@ -32,6 +32,16 @@ namespace GMC_4
         }
 
         /// <summary>
+        /// 16進数の文字列を10進数の数値に変換します。
+        /// </summary>
+        /// <param name="hex">16進数の文字列</param>
+        /// <returns>10進数の数値</returns>
+        public static int HexToInt(string hex)
+        {
+            return int.Parse(hex, System.Globalization.NumberStyles.HexNumber);
+        }
+
+        /// <summary>
         /// 各記憶領域をリセットします。
         /// </summary>
         public static void reset()
@@ -39,6 +49,7 @@ namespace GMC_4
             Memory.reset();
             Register.reset();
             Buffer.reset();
+            Address.reset();
         }
     }
 }

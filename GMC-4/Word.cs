@@ -9,8 +9,8 @@ namespace GMC_4
     {
         private char _value = '0';
 
-        public Word() {
-            _value = '0';
+        public Word(char value = '0') {
+            _value = value;
         }
 
         public char get()

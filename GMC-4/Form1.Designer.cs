@@ -73,6 +73,7 @@
             this.buttonE = new System.Windows.Forms.Button();
             this.buttonF = new System.Windows.Forms.Button();
             this.addressSetButton = new System.Windows.Forms.Button();
+            this.memoryResetButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.SegmentLED0)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SegmentLED1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SegmentLED2)).BeginInit();
@@ -506,11 +507,21 @@
             this.addressSetButton.UseVisualStyleBackColor = true;
             this.addressSetButton.Click += new System.EventHandler(this.addressSetButton_Click);
             // 
+            // memoryResetButton
+            // 
+            this.memoryResetButton.Location = new System.Drawing.Point(333, 361);
+            this.memoryResetButton.Name = "memoryResetButton";
+            this.memoryResetButton.Size = new System.Drawing.Size(40, 37);
+            this.memoryResetButton.TabIndex = 38;
+            this.memoryResetButton.UseVisualStyleBackColor = true;
+            this.memoryResetButton.Click += new System.EventHandler(this.memoryResetButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.memoryResetButton);
             this.Controls.Add(this.addressSetButton);
             this.Controls.Add(this.buttonF);
             this.Controls.Add(this.buttonE);
@@ -600,7 +611,6 @@
         private System.Windows.Forms.TextBox memoryText;
         private System.Windows.Forms.Button assembleButton;
         private System.Windows.Forms.Button runButton;
-        private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Button resetButton;
         private System.Windows.Forms.Button button0;
         private System.Windows.Forms.Button button1;
@@ -619,6 +629,8 @@
         private System.Windows.Forms.Button buttonE;
         private System.Windows.Forms.Button buttonF;
         private System.Windows.Forms.Button addressSetButton;
+        private System.Windows.Forms.Button memoryResetButton;
+        public System.Windows.Forms.Timer timer1;
     }
 }
 

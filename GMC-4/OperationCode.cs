@@ -134,6 +134,10 @@ namespace GMC_4
 
         }
 
+        /// <summary>
+        /// データメモリ領域に値を記憶させます。
+        /// </summary>
+        /// <param name="value">値</param>
         private static void storageValueToMemory(char value)
         {
             // データメモリのアドレスをアドレスとしてセット(バッファオーバーフローしたときの処理があるため)
@@ -143,6 +147,9 @@ namespace GMC_4
             dataMemoryAddress = Address.get();
         }
 
+        /// <summary>
+        /// データメモリ領域のアドレスをリセットします。
+        /// </summary>
         public static void resetDataMemoryAddress()
         {
             dataMemoryAddress = Program.HexToInt("50");

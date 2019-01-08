@@ -100,6 +100,7 @@ namespace GMC_4
             var code = operationCodeToInstructionCode[operationCode];
             Memory.set(code, Address.get());
             Address.increment();
+            // RETのみアドレスジャンプを要求してくる
             if (operationCode == "RET")
             {
                 Memory.set('F', Address.get());
@@ -107,29 +108,22 @@ namespace GMC_4
                 Memory.set('F', Address.get());
                 Address.increment();
             }
-            else if ('8' <= code && code <= 'F' && code != 'E')
+            // オペランドが1つある
+            if ('8' <= code && code <= 'D')
             {
-                if (code == 'F')
-                {
-                    // ラベルジャンプ
-                    var address = Memory.labelList.Where(x => x.Name() == operand).Select(x => x.Address()).First();
-                    Memory.set(address[0], Address.get());
-                    Address.increment();
-                    Memory.set(address[1], Address.get());
-                    Address.increment();
-                }
-                else
-                {
-                    Memory.set(operand[0], Address.get());
-                    Address.increment();
-                }
-            }
-            if(code == 'F')
-            {
-                Memory.set(operand[1], Address.get());
+                Memory.set(operand[0], Address.get());
                 Address.increment();
             }
-
+            // ラベルジャンプ命令
+            if (code == 'F' && operationCode != "RET")
+            {
+                Console.WriteLine("Search label " + operand);
+                var address = Memory.labelList.Where(x => x.Name() == operand).Select(x => x.Address()).First();
+                Memory.set(address[0], Address.get());
+                Address.increment();
+                Memory.set(address[1], Address.get());
+                Address.increment();
+            }
             // 拡張命令の場合はオペランドを命令に変換する
             if (code == 'E')
             {

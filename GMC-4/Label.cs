@@ -7,8 +7,8 @@ namespace GMC_4
 {
     class Label
     {
-        private static string _name;
-        private static string _address;
+        private string _name;
+        private string _address;
 
         public Label(string name, int address)
         {
@@ -16,12 +16,12 @@ namespace GMC_4
             _address = address.ToString("X2");
         }
 
-        public static string Name()
+        public string Name()
         {
             return _name;
         }
 
-        public static string Address()
+        public string Address()
         {
             return _address;
         }

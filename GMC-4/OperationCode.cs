@@ -25,6 +25,7 @@ namespace GMC_4
             {"CIA", 2 },
             {"CIY", 2 },
             {"JUMP", 3 },
+            {"CAL", 2 },
             {"DC", 1 },
             {"RET", 3 }
         };
@@ -46,7 +47,27 @@ namespace GMC_4
             {"CIA", 'C' },
             {"CIY", 'D' },
             {"JUMP", 'F' },
+            {"CAL", 'E' },
             {"RET", 'F' }
+        };
+
+        private static Dictionary<string, char> extendOperationCodeToInstructionCode = new Dictionary<string, char>()
+        {
+            {"RSTO", '0' },
+            {"SETR", '1' },
+            {"RSTR", '2' },
+            {"CMPL", '4' },
+            {"CHNG", '5' },
+            {"SIFT", '6' },
+            {"ENDS", '7' },
+            {"ERRS", '8' },
+            {"SHTS", '9' },
+            {"LONS", 'A' },
+            {"SUND", 'B' },
+            {"TIMR", 'C' },
+            {"DSPR", 'D' },
+            {"DEM-", 'E' },
+            {"DEM+", 'F' }
         };
 
         /// <summary>
@@ -79,17 +100,44 @@ namespace GMC_4
             var code = operationCodeToInstructionCode[operationCode];
             Memory.set(code, Address.get());
             Address.increment();
-            if (operationCode == "RET") operand = "FF";
-            if ('8' <= code && code <= 'F')
+            if (operationCode == "RET")
             {
-                Memory.set(operand[0], Address.get());
+                Memory.set('F', Address.get());
                 Address.increment();
+                Memory.set('F', Address.get());
+                Address.increment();
+            }
+            else if ('8' <= code && code <= 'F' && code != 'E')
+            {
+                if (code == 'F')
+                {
+                    // ラベルジャンプ
+                    var address = Memory.labelList.Where(x => x.Name() == operand).Select(x => x.Address()).First();
+                    Memory.set(address[0], Address.get());
+                    Address.increment();
+                    Memory.set(address[1], Address.get());
+                    Address.increment();
+                }
+                else
+                {
+                    Memory.set(operand[0], Address.get());
+                    Address.increment();
+                }
             }
             if(code == 'F')
             {
                 Memory.set(operand[1], Address.get());
                 Address.increment();
             }
+
+            // 拡張命令の場合はオペランドを命令に変換する
+            if (code == 'E')
+            {
+                var exCode = extendOperationCodeToInstructionCode[operand];
+                Memory.set(exCode, Address.get());
+                Address.increment();
+            }
+
         }
 
         private static void storageValueToMemory(char value)

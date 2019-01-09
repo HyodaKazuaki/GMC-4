@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace GMC_4
+﻿namespace GMC_4
 {
     /// <summary>
     /// 1ワードを記憶するクラス

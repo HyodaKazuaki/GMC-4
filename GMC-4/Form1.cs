@@ -230,6 +230,7 @@ namespace GMC_4
         private void resetClockSpeed()
         {
             timer1.Interval = 100;
+            clockSpeed.Value = 1000 / 100;
         }
 
         private bool didStepRun = false;

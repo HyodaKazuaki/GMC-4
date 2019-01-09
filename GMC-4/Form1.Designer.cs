@@ -618,7 +618,7 @@
             this.clockSpeed.Size = new System.Drawing.Size(68, 26);
             this.clockSpeed.TabIndex = 39;
             this.clockSpeed.Value = new decimal(new int[] {
-            100,
+            10,
             0,
             0,
             0});

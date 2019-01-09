@@ -203,6 +203,10 @@ namespace GMC_4
                 {
                     Error error = new Error("E21", "命令 " + operationCode + " の指定するラベルは存在しません。", i + 1);
                 }
+                catch(KeyNotFoundException e)
+                {
+                    Error error = new Error("E01", "命令 " + operationCode + " " + operand + " は存在しません", i + 1);
+                }
             }
 
         }

@@ -35,6 +35,7 @@ namespace GMC_4
             Memory.resetLabel();
             Address.reset();
             OperationCode.resetDataMemoryAddress();
+            Error.isError = false;
 
             // スタートラインを探し、ラベルを処理した上で機械語に変換する
             try
@@ -53,6 +54,9 @@ namespace GMC_4
                 Error error = new Error("E12", "エンドラインが見つかりません。");
                 return;
             }
+
+            // エラーが発生していればメモリをリセットする
+            if (Error.isError) Memory.reset();
         }
 
         private void convertUppercaseLetter()

@@ -9,6 +9,8 @@ namespace GMC_4
         private string message;
         private int? line;
 
+        public static bool isError = false;
+
         /// <summary>
         /// エラーを表示します。
         /// </summary>
@@ -22,7 +24,7 @@ namespace GMC_4
             line = errorLine;
 
             showErrorDialog();
-            Program.reset();
+            isError = true;
         }
 
         /// <summary>

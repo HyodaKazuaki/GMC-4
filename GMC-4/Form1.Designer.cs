@@ -97,8 +97,9 @@
             // 
             // buttonINCR
             // 
+            this.buttonINCR.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.buttonINCR.Font = new System.Drawing.Font("Gill Sans MT", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonINCR.Location = new System.Drawing.Point(668, 126);
+            this.buttonINCR.Location = new System.Drawing.Point(737, 126);
             this.buttonINCR.Name = "buttonINCR";
             this.buttonINCR.Size = new System.Drawing.Size(101, 35);
             this.buttonINCR.TabIndex = 0;
@@ -108,6 +109,7 @@
             // 
             // SegmentLED0
             // 
+            this.SegmentLED0.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.SegmentLED0.BackColor = System.Drawing.Color.Black;
             this.SegmentLED0.Location = new System.Drawing.Point(301, 89);
             this.SegmentLED0.Name = "SegmentLED0";
@@ -117,6 +119,7 @@
             // 
             // SegmentLED1
             // 
+            this.SegmentLED1.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.SegmentLED1.BackColor = System.Drawing.Color.Black;
             this.SegmentLED1.Location = new System.Drawing.Point(389, 108);
             this.SegmentLED1.Name = "SegmentLED1";
@@ -126,6 +129,7 @@
             // 
             // SegmentLED2
             // 
+            this.SegmentLED2.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.SegmentLED2.BackColor = System.Drawing.Color.Black;
             this.SegmentLED2.Location = new System.Drawing.Point(389, 205);
             this.SegmentLED2.Name = "SegmentLED2";
@@ -135,6 +139,7 @@
             // 
             // SegmentLED3
             // 
+            this.SegmentLED3.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.SegmentLED3.BackColor = System.Drawing.Color.Black;
             this.SegmentLED3.Location = new System.Drawing.Point(301, 288);
             this.SegmentLED3.Name = "SegmentLED3";
@@ -144,6 +149,7 @@
             // 
             // SegmentLED4
             // 
+            this.SegmentLED4.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.SegmentLED4.BackColor = System.Drawing.Color.Black;
             this.SegmentLED4.Location = new System.Drawing.Point(276, 205);
             this.SegmentLED4.Name = "SegmentLED4";
@@ -153,6 +159,7 @@
             // 
             // SegmentLED5
             // 
+            this.SegmentLED5.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.SegmentLED5.BackColor = System.Drawing.Color.Black;
             this.SegmentLED5.Location = new System.Drawing.Point(276, 108);
             this.SegmentLED5.Name = "SegmentLED5";
@@ -162,6 +169,7 @@
             // 
             // SegmentLED6
             // 
+            this.SegmentLED6.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.SegmentLED6.BackColor = System.Drawing.Color.Black;
             this.SegmentLED6.Location = new System.Drawing.Point(301, 187);
             this.SegmentLED6.Name = "SegmentLED6";
@@ -171,6 +179,7 @@
             // 
             // binaryLED0
             // 
+            this.binaryLED0.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.binaryLED0.BackColor = System.Drawing.Color.Black;
             this.binaryLED0.Location = new System.Drawing.Point(658, 30);
             this.binaryLED0.Name = "binaryLED0";
@@ -180,6 +189,7 @@
             // 
             // binaryLED1
             // 
+            this.binaryLED1.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.binaryLED1.BackColor = System.Drawing.Color.Black;
             this.binaryLED1.Location = new System.Drawing.Point(587, 30);
             this.binaryLED1.Name = "binaryLED1";
@@ -189,6 +199,7 @@
             // 
             // binaryLED2
             // 
+            this.binaryLED2.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.binaryLED2.BackColor = System.Drawing.Color.Black;
             this.binaryLED2.Location = new System.Drawing.Point(514, 30);
             this.binaryLED2.Name = "binaryLED2";
@@ -198,6 +209,7 @@
             // 
             // binaryLED3
             // 
+            this.binaryLED3.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.binaryLED3.BackColor = System.Drawing.Color.Black;
             this.binaryLED3.Location = new System.Drawing.Point(427, 30);
             this.binaryLED3.Name = "binaryLED3";
@@ -207,6 +219,7 @@
             // 
             // binaryLED4
             // 
+            this.binaryLED4.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.binaryLED4.BackColor = System.Drawing.Color.Black;
             this.binaryLED4.Location = new System.Drawing.Point(343, 30);
             this.binaryLED4.Name = "binaryLED4";
@@ -216,6 +229,7 @@
             // 
             // binaryLED5
             // 
+            this.binaryLED5.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.binaryLED5.BackColor = System.Drawing.Color.Black;
             this.binaryLED5.Location = new System.Drawing.Point(250, 30);
             this.binaryLED5.Name = "binaryLED5";
@@ -225,6 +239,7 @@
             // 
             // binaryLED6
             // 
+            this.binaryLED6.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.binaryLED6.BackColor = System.Drawing.Color.Black;
             this.binaryLED6.Location = new System.Drawing.Point(146, 30);
             this.binaryLED6.Name = "binaryLED6";
@@ -236,6 +251,9 @@
             // 
             this.sourceCodeBox.AcceptsReturn = true;
             this.sourceCodeBox.AcceptsTab = true;
+            this.sourceCodeBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.sourceCodeBox.Font = new System.Drawing.Font("Yu Gothic UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.sourceCodeBox.Location = new System.Drawing.Point(12, 55);
             this.sourceCodeBox.Multiline = true;
@@ -249,7 +267,7 @@
             this.fileFToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(864, 24);
             this.menuStrip1.TabIndex = 16;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -282,13 +300,16 @@
             // 
             // memoryText
             // 
-            this.memoryText.Location = new System.Drawing.Point(12, 419);
+            this.memoryText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.memoryText.Location = new System.Drawing.Point(12, 426);
             this.memoryText.Name = "memoryText";
-            this.memoryText.Size = new System.Drawing.Size(776, 19);
+            this.memoryText.Size = new System.Drawing.Size(845, 19);
             this.memoryText.TabIndex = 17;
             // 
             // assembleButton
             // 
+            this.assembleButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.assembleButton.Font = new System.Drawing.Font("Gill Sans MT", 12F);
             this.assembleButton.Location = new System.Drawing.Point(44, 372);
             this.assembleButton.Name = "assembleButton";
@@ -300,8 +321,9 @@
             // 
             // runButton
             // 
+            this.runButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.runButton.Font = new System.Drawing.Font("Gill Sans MT", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.runButton.Location = new System.Drawing.Point(668, 187);
+            this.runButton.Location = new System.Drawing.Point(737, 187);
             this.runButton.Name = "runButton";
             this.runButton.Size = new System.Drawing.Size(101, 35);
             this.runButton.TabIndex = 19;
@@ -315,8 +337,9 @@
             // 
             // resetButton
             // 
+            this.resetButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.resetButton.Font = new System.Drawing.Font("Gill Sans MT", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.resetButton.Location = new System.Drawing.Point(668, 363);
+            this.resetButton.Location = new System.Drawing.Point(737, 363);
             this.resetButton.Name = "resetButton";
             this.resetButton.Size = new System.Drawing.Size(101, 35);
             this.resetButton.TabIndex = 20;
@@ -326,8 +349,9 @@
             // 
             // button0
             // 
+            this.button0.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.button0.Font = new System.Drawing.Font("Gill Sans MT", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button0.Location = new System.Drawing.Point(449, 316);
+            this.button0.Location = new System.Drawing.Point(477, 262);
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(39, 35);
             this.button0.TabIndex = 21;
@@ -337,8 +361,9 @@
             // 
             // button1
             // 
+            this.button1.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.button1.Font = new System.Drawing.Font("Gill Sans MT", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(494, 316);
+            this.button1.Location = new System.Drawing.Point(522, 262);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(39, 35);
             this.button1.TabIndex = 22;
@@ -348,8 +373,9 @@
             // 
             // button2
             // 
+            this.button2.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.button2.Font = new System.Drawing.Font("Gill Sans MT", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(539, 316);
+            this.button2.Location = new System.Drawing.Point(567, 262);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(39, 35);
             this.button2.TabIndex = 23;
@@ -359,8 +385,9 @@
             // 
             // button3
             // 
+            this.button3.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.button3.Font = new System.Drawing.Font("Gill Sans MT", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.Location = new System.Drawing.Point(587, 316);
+            this.button3.Location = new System.Drawing.Point(615, 262);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(39, 35);
             this.button3.TabIndex = 24;
@@ -370,8 +397,9 @@
             // 
             // button4
             // 
+            this.button4.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.button4.Font = new System.Drawing.Font("Gill Sans MT", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.Location = new System.Drawing.Point(449, 275);
+            this.button4.Location = new System.Drawing.Point(477, 221);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(39, 35);
             this.button4.TabIndex = 25;
@@ -381,8 +409,9 @@
             // 
             // button5
             // 
+            this.button5.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.button5.Font = new System.Drawing.Font("Gill Sans MT", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button5.Location = new System.Drawing.Point(494, 275);
+            this.button5.Location = new System.Drawing.Point(522, 221);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(39, 35);
             this.button5.TabIndex = 26;
@@ -392,8 +421,9 @@
             // 
             // button6
             // 
+            this.button6.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.button6.Font = new System.Drawing.Font("Gill Sans MT", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button6.Location = new System.Drawing.Point(539, 275);
+            this.button6.Location = new System.Drawing.Point(567, 221);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(39, 35);
             this.button6.TabIndex = 27;
@@ -403,8 +433,9 @@
             // 
             // button7
             // 
+            this.button7.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.button7.Font = new System.Drawing.Font("Gill Sans MT", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button7.Location = new System.Drawing.Point(587, 275);
+            this.button7.Location = new System.Drawing.Point(615, 221);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(39, 35);
             this.button7.TabIndex = 28;
@@ -414,8 +445,9 @@
             // 
             // button8
             // 
+            this.button8.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.button8.Font = new System.Drawing.Font("Gill Sans MT", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button8.Location = new System.Drawing.Point(449, 234);
+            this.button8.Location = new System.Drawing.Point(477, 180);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(39, 35);
             this.button8.TabIndex = 29;
@@ -425,8 +457,9 @@
             // 
             // button9
             // 
+            this.button9.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.button9.Font = new System.Drawing.Font("Gill Sans MT", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button9.Location = new System.Drawing.Point(494, 234);
+            this.button9.Location = new System.Drawing.Point(522, 180);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(39, 35);
             this.button9.TabIndex = 30;
@@ -436,8 +469,9 @@
             // 
             // buttonA
             // 
+            this.buttonA.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.buttonA.Font = new System.Drawing.Font("Gill Sans MT", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonA.Location = new System.Drawing.Point(539, 234);
+            this.buttonA.Location = new System.Drawing.Point(567, 180);
             this.buttonA.Name = "buttonA";
             this.buttonA.Size = new System.Drawing.Size(39, 35);
             this.buttonA.TabIndex = 31;
@@ -447,8 +481,9 @@
             // 
             // buttonB
             // 
+            this.buttonB.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.buttonB.Font = new System.Drawing.Font("Gill Sans MT", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonB.Location = new System.Drawing.Point(587, 234);
+            this.buttonB.Location = new System.Drawing.Point(615, 180);
             this.buttonB.Name = "buttonB";
             this.buttonB.Size = new System.Drawing.Size(39, 35);
             this.buttonB.TabIndex = 32;
@@ -458,8 +493,9 @@
             // 
             // buttonC
             // 
+            this.buttonC.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.buttonC.Font = new System.Drawing.Font("Gill Sans MT", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonC.Location = new System.Drawing.Point(449, 193);
+            this.buttonC.Location = new System.Drawing.Point(477, 139);
             this.buttonC.Name = "buttonC";
             this.buttonC.Size = new System.Drawing.Size(39, 35);
             this.buttonC.TabIndex = 33;
@@ -469,8 +505,9 @@
             // 
             // buttonD
             // 
+            this.buttonD.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.buttonD.Font = new System.Drawing.Font("Gill Sans MT", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonD.Location = new System.Drawing.Point(494, 193);
+            this.buttonD.Location = new System.Drawing.Point(522, 139);
             this.buttonD.Name = "buttonD";
             this.buttonD.Size = new System.Drawing.Size(39, 35);
             this.buttonD.TabIndex = 34;
@@ -480,8 +517,9 @@
             // 
             // buttonE
             // 
+            this.buttonE.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.buttonE.Font = new System.Drawing.Font("Gill Sans MT", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonE.Location = new System.Drawing.Point(539, 193);
+            this.buttonE.Location = new System.Drawing.Point(567, 139);
             this.buttonE.Name = "buttonE";
             this.buttonE.Size = new System.Drawing.Size(39, 35);
             this.buttonE.TabIndex = 35;
@@ -491,8 +529,9 @@
             // 
             // buttonF
             // 
+            this.buttonF.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.buttonF.Font = new System.Drawing.Font("Gill Sans MT", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonF.Location = new System.Drawing.Point(587, 193);
+            this.buttonF.Location = new System.Drawing.Point(615, 139);
             this.buttonF.Name = "buttonF";
             this.buttonF.Size = new System.Drawing.Size(39, 35);
             this.buttonF.TabIndex = 36;
@@ -502,8 +541,9 @@
             // 
             // addressSetButton
             // 
+            this.addressSetButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.addressSetButton.Font = new System.Drawing.Font("Gill Sans MT", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addressSetButton.Location = new System.Drawing.Point(668, 73);
+            this.addressSetButton.Location = new System.Drawing.Point(737, 73);
             this.addressSetButton.Name = "addressSetButton";
             this.addressSetButton.Size = new System.Drawing.Size(101, 35);
             this.addressSetButton.TabIndex = 37;
@@ -513,18 +553,22 @@
             // 
             // memoryResetButton
             // 
-            this.memoryResetButton.Location = new System.Drawing.Point(333, 361);
+            this.memoryResetButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.memoryResetButton.Font = new System.Drawing.Font("Gill Sans MT", 12F);
+            this.memoryResetButton.Location = new System.Drawing.Point(324, 361);
             this.memoryResetButton.Name = "memoryResetButton";
-            this.memoryResetButton.Size = new System.Drawing.Size(40, 37);
+            this.memoryResetButton.Size = new System.Drawing.Size(50, 37);
             this.memoryResetButton.TabIndex = 38;
+            this.memoryResetButton.Text = "CLR";
             this.memoryResetButton.UseVisualStyleBackColor = true;
             this.memoryResetButton.Click += new System.EventHandler(this.memoryResetButton_Click);
             // 
             // clockSpeed
             // 
+            this.clockSpeed.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.clockSpeed.Font = new System.Drawing.Font("Gill Sans MT", 12F);
             this.clockSpeed.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.clockSpeed.Location = new System.Drawing.Point(658, 251);
+            this.clockSpeed.Location = new System.Drawing.Point(727, 251);
             this.clockSpeed.Minimum = new decimal(new int[] {
             1,
             0,
@@ -541,8 +585,9 @@
             // 
             // clockSpeedSetButton
             // 
+            this.clockSpeedSetButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.clockSpeedSetButton.Font = new System.Drawing.Font("Gill Sans MT", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.clockSpeedSetButton.Location = new System.Drawing.Point(722, 247);
+            this.clockSpeedSetButton.Location = new System.Drawing.Point(791, 247);
             this.clockSpeedSetButton.Name = "clockSpeedSetButton";
             this.clockSpeedSetButton.Size = new System.Drawing.Size(66, 35);
             this.clockSpeedSetButton.TabIndex = 40;
@@ -552,8 +597,9 @@
             // 
             // stepRunButton
             // 
+            this.stepRunButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.stepRunButton.Font = new System.Drawing.Font("Gill Sans MT", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.stepRunButton.Location = new System.Drawing.Point(668, 307);
+            this.stepRunButton.Location = new System.Drawing.Point(737, 307);
             this.stepRunButton.Name = "stepRunButton";
             this.stepRunButton.Size = new System.Drawing.Size(101, 35);
             this.stepRunButton.TabIndex = 41;
@@ -565,7 +611,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(864, 459);
             this.Controls.Add(this.stepRunButton);
             this.Controls.Add(this.clockSpeedSetButton);
             this.Controls.Add(this.clockSpeed);
@@ -609,6 +655,7 @@
             this.Controls.Add(this.buttonINCR);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
+            this.MinimumSize = new System.Drawing.Size(880, 498);
             this.Name = "Form1";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.SegmentLED0)).EndInit();

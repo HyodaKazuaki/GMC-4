@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace GMC_4
 {
@@ -48,6 +46,19 @@ namespace GMC_4
             if (Program.IsHex(data))
             {
                 memory[address] = data;
+            }
+        }
+
+        /// <summary>
+        /// 現在のアドレス番地に値をセットします。また、アドレス番地のインクリメントを行います。
+        /// </summary>
+        /// <param name="data">値</param>
+        public static void write(char data)
+        {
+            if(Program.IsHex(data))
+            {
+                memory[Address.get()] = data;
+                Address.increment();
             }
         }
     }

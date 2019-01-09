@@ -1,19 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace GMC_4
 {
+    /// <summary>
+    /// 2ワード分記憶するバッファのクラス
+    /// </summary>
     static class Buffer
     {
         private static Word[] buffer;
 
         public static bool Flag { get; private set; } = false;
 
+        /// <summary>
+        /// バッファをリセットします。
+        /// </summary>
         public static void reset()
         {
-            buffer = Enumerable.Repeat(new Word(), 2).ToArray();  //buffer.Select(buf => buf = new Word()).ToArray();
+            buffer = Enumerable.Repeat(new Word(), 2).ToArray();
             Flag = false;
         }
 

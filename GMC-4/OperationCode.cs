@@ -7,7 +7,12 @@ namespace GMC_4
 {
     static class OperationCode
     {
+        // データメモリのアドレス
         private static int dataMemoryAddress = Program.HexToInt("50");
+
+        /// <summary>
+        /// オペコードを機械語に変換するときに必要なメモリアドレス数の辞書
+        /// </summary>
         private static Dictionary<string, int> operationCodeToAddress = new Dictionary<string, int>()
         {
             {"KA", 1 },
@@ -30,6 +35,9 @@ namespace GMC_4
             {"RET", 3 }
         };
 
+        /// <summary>
+        /// オペコードを機械語に変換する辞書
+        /// </summary>
         private static Dictionary<string, char> operationCodeToInstructionCode = new Dictionary<string, char>()
         {
             {"KA", '0' },
@@ -51,6 +59,9 @@ namespace GMC_4
             {"RET", 'F' }
         };
 
+        /// <summary>
+        /// 拡張命令(CAL)を機械語に変換する辞書
+        /// </summary>
         private static Dictionary<string, char> extendOperationCodeToInstructionCode = new Dictionary<string, char>()
         {
             {"RSTO", '0' },
@@ -90,7 +101,7 @@ namespace GMC_4
             // 命令がない場合は飛ばす
             if (operationCode == "")
                 return;
-            // DC命令はオペランドを記憶する
+            // DC命令はオペランドをデータメモリに記憶する
             if(operationCode == "DC")
             {
                 storageValueToMemory(operand.First());
@@ -98,38 +109,31 @@ namespace GMC_4
             }
             // オペコードを変換
             var code = operationCodeToInstructionCode[operationCode];
-            Memory.set(code, Address.get());
-            Address.increment();
+            Memory.write(code);
             // RETのみアドレスジャンプを要求してくる
             if (operationCode == "RET")
             {
-                Memory.set('F', Address.get());
-                Address.increment();
-                Memory.set('F', Address.get());
-                Address.increment();
+                Memory.write('F');
+                Memory.write('F');
             }
             // オペランドが1つある
             if ('8' <= code && code <= 'D')
             {
-                Memory.set(operand[0], Address.get());
-                Address.increment();
+                Memory.write(operand[0]);
             }
             // ラベルジャンプ命令
             if (code == 'F' && operationCode != "RET")
             {
                 Console.WriteLine("Search label " + operand);
                 var address = Memory.labelList.Where(x => x.Name() == operand).Select(x => x.Address()).First();
-                Memory.set(address[0], Address.get());
-                Address.increment();
-                Memory.set(address[1], Address.get());
-                Address.increment();
+                Memory.write(address[0]);
+                Memory.write(address[1]);
             }
             // 拡張命令の場合はオペランドを命令に変換する
             if (code == 'E')
             {
                 var exCode = extendOperationCodeToInstructionCode[operand];
-                Memory.set(exCode, Address.get());
-                Address.increment();
+                Memory.write(exCode);
             }
 
         }
@@ -142,8 +146,7 @@ namespace GMC_4
         {
             // データメモリのアドレスをアドレスとしてセット(バッファオーバーフローしたときの処理があるため)
             Address.set(dataMemoryAddress);
-            Memory.set(value, Address.get());
-            Address.increment();
+            Memory.write(value);
             dataMemoryAddress = Address.get();
         }
 

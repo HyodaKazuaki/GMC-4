@@ -74,6 +74,8 @@
             this.buttonF = new System.Windows.Forms.Button();
             this.addressSetButton = new System.Windows.Forms.Button();
             this.memoryResetButton = new System.Windows.Forms.Button();
+            this.clockSpeed = new System.Windows.Forms.NumericUpDown();
+            this.clockSpeedSetButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.SegmentLED0)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SegmentLED1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SegmentLED2)).BeginInit();
@@ -89,12 +91,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.binaryLED5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.binaryLED6)).BeginInit();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.clockSpeed)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonINCR
             // 
             this.buttonINCR.Font = new System.Drawing.Font("Gill Sans MT", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonINCR.Location = new System.Drawing.Point(687, 126);
+            this.buttonINCR.Location = new System.Drawing.Point(668, 126);
             this.buttonINCR.Name = "buttonINCR";
             this.buttonINCR.Size = new System.Drawing.Size(101, 35);
             this.buttonINCR.TabIndex = 0;
@@ -297,7 +300,7 @@
             // runButton
             // 
             this.runButton.Font = new System.Drawing.Font("Gill Sans MT", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.runButton.Location = new System.Drawing.Point(687, 187);
+            this.runButton.Location = new System.Drawing.Point(668, 187);
             this.runButton.Name = "runButton";
             this.runButton.Size = new System.Drawing.Size(101, 35);
             this.runButton.TabIndex = 19;
@@ -312,7 +315,7 @@
             // resetButton
             // 
             this.resetButton.Font = new System.Drawing.Font("Gill Sans MT", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.resetButton.Location = new System.Drawing.Point(687, 248);
+            this.resetButton.Location = new System.Drawing.Point(668, 316);
             this.resetButton.Name = "resetButton";
             this.resetButton.Size = new System.Drawing.Size(101, 35);
             this.resetButton.TabIndex = 20;
@@ -499,7 +502,7 @@
             // addressSetButton
             // 
             this.addressSetButton.Font = new System.Drawing.Font("Gill Sans MT", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addressSetButton.Location = new System.Drawing.Point(687, 73);
+            this.addressSetButton.Location = new System.Drawing.Point(668, 73);
             this.addressSetButton.Name = "addressSetButton";
             this.addressSetButton.Size = new System.Drawing.Size(101, 35);
             this.addressSetButton.TabIndex = 37;
@@ -516,11 +519,43 @@
             this.memoryResetButton.UseVisualStyleBackColor = true;
             this.memoryResetButton.Click += new System.EventHandler(this.memoryResetButton_Click);
             // 
+            // clockSpeed
+            // 
+            this.clockSpeed.Font = new System.Drawing.Font("Gill Sans MT", 12F);
+            this.clockSpeed.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.clockSpeed.Location = new System.Drawing.Point(658, 251);
+            this.clockSpeed.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.clockSpeed.Name = "clockSpeed";
+            this.clockSpeed.Size = new System.Drawing.Size(58, 26);
+            this.clockSpeed.TabIndex = 39;
+            this.clockSpeed.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // clockSpeedSetButton
+            // 
+            this.clockSpeedSetButton.Font = new System.Drawing.Font("Gill Sans MT", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.clockSpeedSetButton.Location = new System.Drawing.Point(722, 247);
+            this.clockSpeedSetButton.Name = "clockSpeedSetButton";
+            this.clockSpeedSetButton.Size = new System.Drawing.Size(66, 35);
+            this.clockSpeedSetButton.TabIndex = 40;
+            this.clockSpeedSetButton.Text = "Hz SET";
+            this.clockSpeedSetButton.UseVisualStyleBackColor = true;
+            this.clockSpeedSetButton.Click += new System.EventHandler(this.clockSpeedSetButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.clockSpeedSetButton);
+            this.Controls.Add(this.clockSpeed);
             this.Controls.Add(this.memoryResetButton);
             this.Controls.Add(this.addressSetButton);
             this.Controls.Add(this.buttonF);
@@ -579,6 +614,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.binaryLED6)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.clockSpeed)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -631,6 +667,8 @@
         private System.Windows.Forms.Button addressSetButton;
         private System.Windows.Forms.Button memoryResetButton;
         public System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.NumericUpDown clockSpeed;
+        private System.Windows.Forms.Button clockSpeedSetButton;
     }
 }
 

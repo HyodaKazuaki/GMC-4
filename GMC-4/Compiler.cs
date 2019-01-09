@@ -8,7 +8,7 @@ namespace GMC_4
     class Compiler
     {
         private string[] sourceCode;
-        private char[] del = { ' ', '\t' };
+        private char[] del = { ' ', '\t' }; // ソースコード中から除去する文字
         private int startLine = 0;
         private int labelAddress = 0;
 
@@ -29,6 +29,7 @@ namespace GMC_4
         /// </summary>
         public void Compile()
         {
+            // スタートラインを探し、ラベルを処理した上で機械語に変換する
             getStartLine();
             addLabel();
             compileOperation();
@@ -53,6 +54,7 @@ namespace GMC_4
             {
                 string[] term = line.value.Split(del, StringSplitOptions.RemoveEmptyEntries);
 
+                // STARTから始まる行をスタートラインとする
                 if (term[0] == "START" && line.value.IndexOf(term[0]) != 0)
                 {
                     startLine = line.index;
@@ -112,7 +114,7 @@ namespace GMC_4
                 operand = "";
 
                 // 1行分取得
-                var line = sourceCode[i];
+                string line = sourceCode[i];
                 string[] term = line.Split(del, StringSplitOptions.RemoveEmptyEntries);
                 
                 if (line.IndexOf(term[0]) == 0)
@@ -137,6 +139,7 @@ namespace GMC_4
                         operand = term[1];
                 }
 
+                // 機械語へ変換
                 OperationCode.compileOperationCode(operationCode, operand);
             }
 

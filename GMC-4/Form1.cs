@@ -69,15 +69,15 @@ namespace GMC_4
         public void setLEDMatrix(char character)
         {
             // 対応する値のみ光らせる
-            SegmentLED0.BackColor = new Char[] { '0', '2', '3', '5', '6', '7', '8', '9', 'A', 'C', 'E', 'F' }.Any(c => c == character) ? Color.Red : Color.Black;
-            SegmentLED1.BackColor = new Char[] { '0', '1', '2', '3', '4', '7', '8', '9', 'A', 'D' }.Any(c => c == character) ? Color.Red : Color.Black;
-            SegmentLED2.BackColor = new Char[] { '0', '1', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'D' }.Any(c => c == character) ? Color.Red : Color.Black;
-            SegmentLED3.BackColor = new Char[] { '0', '2', '3', '5', '6', '8', 'B', 'C', 'D', 'E' }.Any(c => c == character) ? Color.Red : Color.Black;
-            SegmentLED4.BackColor = new Char[] { '0', '2', '6', '8', 'A', 'B', 'C', 'D', 'E', 'F' }.Any(c => c == character) ? Color.Red : Color.Black;
-            SegmentLED5.BackColor = new Char[] { '0', '4', '5', '6', '8', '9', 'A', 'B', 'C', 'E', 'F' }.Any(c => c == character) ? Color.Red : Color.Black;
-            SegmentLED6.BackColor = new Char[] { '2', '3', '4', '5', '6', '8', '9', 'A', 'B', 'D', 'E', 'F' }.Any(c => c == character) ? Color.Red : Color.Black;
+            SegmentLED0.BackColor = new char[] { '0', '2', '3', '5', '6', '7', '8', '9', 'A', 'C', 'E', 'F' }.Any(c => c == character) ? Color.Red : Color.Black;
+            SegmentLED1.BackColor = new char[] { '0', '1', '2', '3', '4', '7', '8', '9', 'A', 'D' }.Any(c => c == character) ? Color.Red : Color.Black;
+            SegmentLED2.BackColor = new char[] { '0', '1', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'D' }.Any(c => c == character) ? Color.Red : Color.Black;
+            SegmentLED3.BackColor = new char[] { '0', '2', '3', '5', '6', '8', 'B', 'C', 'D', 'E' }.Any(c => c == character) ? Color.Red : Color.Black;
+            SegmentLED4.BackColor = new char[] { '0', '2', '6', '8', 'A', 'B', 'C', 'D', 'E', 'F' }.Any(c => c == character) ? Color.Red : Color.Black;
+            SegmentLED5.BackColor = new char[] { '0', '4', '5', '6', '8', '9', 'A', 'B', 'C', 'E', 'F' }.Any(c => c == character) ? Color.Red : Color.Black;
+            SegmentLED6.BackColor = new char[] { '2', '3', '4', '5', '6', '8', '9', 'A', 'B', 'D', 'E', 'F' }.Any(c => c == character) ? Color.Red : Color.Black;
         }
-
+        
         string FileName = "";
 
         private void openFileOToolStripMenuItem_Click(object sender, EventArgs e)

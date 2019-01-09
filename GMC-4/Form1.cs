@@ -173,6 +173,9 @@ namespace GMC_4
             // シミュレーションを1つ行う
             simulator.execute();
 
+            // メモリの状態を更新する
+            setMemoryText();
+
             // メモリアドレスを進める
             Address.increment();
         }

@@ -45,6 +45,7 @@ namespace GMC_4
         public static void reset()
         {
             Memory.reset();
+            Memory.resetLabel();
             Register.reset();
             Buffer.reset();
             Address.reset();

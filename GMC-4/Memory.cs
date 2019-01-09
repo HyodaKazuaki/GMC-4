@@ -19,6 +19,14 @@ namespace GMC_4
         }
 
         /// <summary>
+        /// ラベルをリセットします。
+        /// </summary>
+        public static void resetLabel()
+        {
+            labelList = new List<Label>();
+        }
+
+        /// <summary>
         /// メモリの中身を取得します。
         /// </summary>
         /// <returns>メモリの中身</returns>

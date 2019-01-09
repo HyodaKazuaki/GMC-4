@@ -30,6 +30,12 @@ namespace GMC_4
         /// </summary>
         public void Compile()
         {
+            // コンパイル前の初期化処理
+            Memory.reset();
+            Memory.resetLabel();
+            Address.reset();
+            OperationCode.resetDataMemoryAddress();
+
             // スタートラインを探し、ラベルを処理した上で機械語に変換する
             try
             {
@@ -143,8 +149,6 @@ namespace GMC_4
         {
             string operationCode = "";
             string operand = "";
-            Address.reset();
-            OperationCode.resetDataMemoryAddress();
 
             for(int i = startLine + 1; i < sourceCode.Length; i++)
             {

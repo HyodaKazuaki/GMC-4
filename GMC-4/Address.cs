@@ -7,10 +7,10 @@ namespace GMC_4
 {
     static class Address
     {
-        private static readonly int finalProgramAddress = Program.HexToInt("4F");
-        private static readonly int finalDataAddress = Program.HexToInt("5F");
-        private static readonly int finalMemoryAddress = Program.HexToInt("6F");
-        private static int address = Program.HexToInt("00");
+        public static readonly int finalProgramAddress = Program.HexToInt("4F");
+        public static readonly int finalDataAddress = Program.HexToInt("5F");
+        public static readonly int finalMemoryAddress = Program.HexToInt("6F");
+        public static int address = Program.HexToInt("00");
 
         public static int get()
         {

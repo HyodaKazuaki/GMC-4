@@ -36,6 +36,31 @@ namespace GMC_4
         };
 
         /// <summary>
+        /// 各命令に必要な引数の数の辞書
+        /// </summary>
+        private static Dictionary<string, int> assemblerArgumentOfNumber = new Dictionary<string, int>()
+        {
+            {"KA", 0 },
+            {"AO", 0 },
+            {"CH", 0 },
+            {"CY", 0 },
+            {"AM", 0 },
+            {"MA", 0 },
+            {"M+", 0 },
+            {"M-", 0 },
+            {"TIA", 1 },
+            {"AIA", 1 },
+            {"TIY", 1 },
+            {"AIY", 1 },
+            {"CIA", 1 },
+            {"CIY", 1 },
+            {"JUMP", 1 },
+            {"CAL", 1 },
+            {"DC", 1 },
+            {"RET", 0 }
+        };
+
+        /// <summary>
         /// オペコードを機械語に変換する辞書
         /// </summary>
         private static Dictionary<string, char> operationCodeToInstructionCode = new Dictionary<string, char>()
@@ -98,6 +123,13 @@ namespace GMC_4
         /// <param name="operand">オペランド</param>
         public static void compileOperationCode(string operationCode, string operand)
         {
+            // オペランド過不足チェック
+            var numberOfOperand = operand == "" ? 0 : 1;
+            if (assemblerArgumentOfNumber[operationCode] > numberOfOperand)
+                throw new ArgumentLackException(); // オペランドが少ない
+            if (assemblerArgumentOfNumber[operationCode] < numberOfOperand)
+                throw new ArgumentExcessException(); // オペランドが多い
+
             // 命令がない場合は飛ばす
             if (operationCode == "")
                 return;
@@ -107,6 +139,7 @@ namespace GMC_4
                 storageValueToMemory(operand.First());
                 return;
             }
+
             // オペコードを変換
             var code = operationCodeToInstructionCode[operationCode];
             Memory.write(code);

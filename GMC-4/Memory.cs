@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace GMC_4
@@ -47,6 +48,10 @@ namespace GMC_4
             {
                 memory[address] = data;
             }
+            else
+            {
+                throw new ArgumentOutOfRangeException();
+            }
         }
 
         /// <summary>
@@ -59,6 +64,10 @@ namespace GMC_4
             {
                 memory[Address.get()] = data;
                 Address.increment();
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException();
             }
         }
     }

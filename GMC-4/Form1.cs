@@ -32,7 +32,7 @@ namespace GMC_4
             if(Buffer.Flag) Memory.set(Buffer.get(), Address.get());
             Address.increment();
             // アドレス表示LEDとメモリ表示、LEDマトリクスをセットする
-            setBinaryLED();
+            setBinaryLED(Address.get());
             setMemoryText();
             setLEDMatrix(Memory.get()[Address.get()]);
             // バッファをリセット
@@ -51,18 +51,22 @@ namespace GMC_4
             Buffer.set(buttonNumber);
         }
 
-        private void setBinaryLED()
+        public void setBinaryLED(int address)
         {
             // AND演算で対応するLEDを光らせる
-            binaryLED0.BackColor = ((Address.get() & 0b0000001) == 0b0000001) ? Color.Red : Color.Black;
-            binaryLED1.BackColor = ((Address.get() & 0b0000010) == 0b0000010) ? Color.Red : Color.Black;
-            binaryLED2.BackColor = ((Address.get() & 0b0000100) == 0b0000100) ? Color.Red : Color.Black;
-            binaryLED3.BackColor = ((Address.get() & 0b0001000) == 0b0001000) ? Color.Red : Color.Black;
-            binaryLED4.BackColor = ((Address.get() & 0b0010000) == 0b0010000) ? Color.Red : Color.Black;
-            binaryLED5.BackColor = ((Address.get() & 0b0100000) == 0b0100000) ? Color.Red : Color.Black;
-            binaryLED6.BackColor = ((Address.get() & 0b1000000) == 0b1000000) ? Color.Red : Color.Black;
+            binaryLED0.BackColor = ((address & 0b0000001) == 0b0000001) ? Color.Red : Color.Black;
+            binaryLED1.BackColor = ((address & 0b0000010) == 0b0000010) ? Color.Red : Color.Black;
+            binaryLED2.BackColor = ((address & 0b0000100) == 0b0000100) ? Color.Red : Color.Black;
+            binaryLED3.BackColor = ((address & 0b0001000) == 0b0001000) ? Color.Red : Color.Black;
+            binaryLED4.BackColor = ((address & 0b0010000) == 0b0010000) ? Color.Red : Color.Black;
+            binaryLED5.BackColor = ((address & 0b0100000) == 0b0100000) ? Color.Red : Color.Black;
+            binaryLED6.BackColor = ((address & 0b1000000) == 0b1000000) ? Color.Red : Color.Black;
         }
 
+        /// <summary>
+        /// 入力した値の通りに数字LEDを点灯します。0-F以外の値であればLEDを消灯します。
+        /// </summary>
+        /// <param name="character">値</param>
         public void setLEDMatrix(char character)
         {
             // 対応する値のみ光らせる
@@ -128,21 +132,16 @@ namespace GMC_4
 
         private void runButton_Click(object sender, EventArgs e)
         {
+            // ステップ実行フラグをリセットしておく
+            didStepRun = false;
             // シミュレータを起動する
             startSimulator();
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            Console.WriteLine("Address " + Address.get() + " Processing");
-            // プログラムの終了チェック
-            if (Address.isFinal()) stopSimulator();
-
-            // シミュレーションを1つ行う
-            simulator.execute();
-
-            // メモリアドレスを進める
-            Address.increment();
+            // シミュレーションを行う
+            runSimulation();
         }
 
         private void resetButton_Click(object sender, EventArgs e)
@@ -158,12 +157,22 @@ namespace GMC_4
         {
             Console.WriteLine("Start Simulator");
             Console.WriteLine(Memory.get());
-            // アドレスをスタートへ
-            Address.reset();
-            // バッファのリセット
-            Buffer.reset();
+            resetAddressAndBuffer();
             // クロックタイマーを起動する
             timer1.Start();
+        }
+
+        private void runSimulation()
+        {
+            Console.WriteLine("Address " + Address.get() + " Processing");
+            // プログラムの終了チェック
+            if (Address.isFinal()) stopSimulator();
+
+            // シミュレーションを1つ行う
+            simulator.execute();
+
+            // メモリアドレスを進める
+            Address.increment();
         }
 
         /// <summary>
@@ -171,8 +180,11 @@ namespace GMC_4
         /// </summary>
         public void stopSimulator()
         {
-            // クロックタイマーを停止する
-            timer1.Stop();
+            // クロック実行ならクロックタイマーを停止する
+            if(!didStepRun) timer1.Stop();
+            // ステップ実行ならステップ実行フラグをもとに戻す
+            else didStepRun = false;
+
             Console.WriteLine("Stop Simulator");
         }
 
@@ -181,16 +193,17 @@ namespace GMC_4
             // アドレスを移動する
             Address.set(Buffer.getAsAddress());
             // 移動先アドレスをLED表示する
-            setBinaryLED();
+            setBinaryLED(Address.get());
             // 移動先のメモリの中身を表示する
             setLEDMatrix(Memory.getWord(Address.get()));
         }
 
         private void memoryResetButton_Click(object sender, EventArgs e)
         {
+            stopSimulator();
             Program.reset();
             setMemoryText();
-            setBinaryLED();
+            setBinaryLED(Address.get());
             setLEDMatrix(Memory.getWord(Address.get()));
             resetClockSpeed(); // クロックスピードもリセットする
         }
@@ -205,6 +218,33 @@ namespace GMC_4
         private void resetClockSpeed()
         {
             timer1.Interval = 100;
+        }
+
+        private bool didStepRun = false;
+        private void stepRunButton_Click(object sender, EventArgs e)
+        {
+            // 初回実行ならシミュレータを一旦停止して、アドレスとバッファのリセットを行う
+            if (!didStepRun)
+            {
+                stopSimulator();
+                resetAddressAndBuffer();
+            }
+            // ステップ実行フラグを有効化する
+            didStepRun = true;
+
+            // シミュレーションする
+            runSimulation();
+        }
+
+        /// <summary>
+        /// アドレスとバッファをリセットします。
+        /// </summary>
+        private void resetAddressAndBuffer()
+        {
+            // アドレスをスタートへ
+            Address.reset();
+            // バッファのリセット
+            Buffer.reset();
         }
     }
 }

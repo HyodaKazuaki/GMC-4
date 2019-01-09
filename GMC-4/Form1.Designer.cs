@@ -76,6 +76,7 @@
             this.memoryResetButton = new System.Windows.Forms.Button();
             this.clockSpeed = new System.Windows.Forms.NumericUpDown();
             this.clockSpeedSetButton = new System.Windows.Forms.Button();
+            this.stepRunButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.SegmentLED0)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SegmentLED1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SegmentLED2)).BeginInit();
@@ -315,7 +316,7 @@
             // resetButton
             // 
             this.resetButton.Font = new System.Drawing.Font("Gill Sans MT", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.resetButton.Location = new System.Drawing.Point(668, 316);
+            this.resetButton.Location = new System.Drawing.Point(668, 363);
             this.resetButton.Name = "resetButton";
             this.resetButton.Size = new System.Drawing.Size(101, 35);
             this.resetButton.TabIndex = 20;
@@ -549,11 +550,23 @@
             this.clockSpeedSetButton.UseVisualStyleBackColor = true;
             this.clockSpeedSetButton.Click += new System.EventHandler(this.clockSpeedSetButton_Click);
             // 
+            // stepRunButton
+            // 
+            this.stepRunButton.Font = new System.Drawing.Font("Gill Sans MT", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.stepRunButton.Location = new System.Drawing.Point(668, 307);
+            this.stepRunButton.Name = "stepRunButton";
+            this.stepRunButton.Size = new System.Drawing.Size(101, 35);
+            this.stepRunButton.TabIndex = 41;
+            this.stepRunButton.Text = "STP RUN";
+            this.stepRunButton.UseVisualStyleBackColor = true;
+            this.stepRunButton.Click += new System.EventHandler(this.stepRunButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.stepRunButton);
             this.Controls.Add(this.clockSpeedSetButton);
             this.Controls.Add(this.clockSpeed);
             this.Controls.Add(this.memoryResetButton);
@@ -669,6 +682,7 @@
         public System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.NumericUpDown clockSpeed;
         private System.Windows.Forms.Button clockSpeedSetButton;
+        private System.Windows.Forms.Button stepRunButton;
     }
 }
 

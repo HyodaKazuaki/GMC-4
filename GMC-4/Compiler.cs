@@ -30,9 +30,20 @@ namespace GMC_4
         public void Compile()
         {
             // スタートラインを探し、ラベルを処理した上で機械語に変換する
-            getStartLine();
-            addLabel();
-            compileOperation();
+            try
+            {
+                getStartLine();
+                addLabel();
+                compileOperation();
+            }
+            catch (StartLineNotFoundException e)
+            {
+                Error error = new Error("E11", "スタートラインが見つかりません。");
+            }
+            catch (EndLineNotFoundException e)
+            {
+                Error error = new Error("E12", "エンドラインが見つかりません。");
+            }
         }
 
         /// <summary>
@@ -50,6 +61,7 @@ namespace GMC_4
         /// </summary>
         private void getStartLine()
         {
+            bool notFoundStartLine = true;
             foreach (var line in sourceCode.Select((value, index) => new { value, index }))
             {
                 string[] term = line.value.Split(del, StringSplitOptions.RemoveEmptyEntries);
@@ -58,9 +70,12 @@ namespace GMC_4
                 if (term[0] == "START" && line.value.IndexOf(term[0]) != 0)
                 {
                     startLine = line.index;
+                    notFoundStartLine = false;
                     break;
                 }
             }
+            // スタートラインがない
+            if (notFoundStartLine) throw new StartLineNotFoundException();
         }
 
         /// <summary>
@@ -69,32 +84,50 @@ namespace GMC_4
         private void addLabel()
         {
             string operationCode = "";
-            for(int i = startLine + 1; i < sourceCode.Length; i++)
+            bool notFoundEndLine = true;
+            for (int i = startLine + 1; i < sourceCode.Length; i++)
             {
-                var value = sourceCode[i];
-                string[] term = value.Split(del, StringSplitOptions.RemoveEmptyEntries);
+                try
+                {
+                    var value = sourceCode[i];
+                    string[] term = value.Split(del, StringSplitOptions.RemoveEmptyEntries);
 
-                if (value.IndexOf(term[0]) == 0)
-                {
-                    // ラベル追加
-                    Memory.labelList.Add(new Label(term[0], labelAddress));
-                    // オペコードは第二引数部
-                    operationCode = term[1];
-                }
-                else if (term[0] == "END" && value.IndexOf(term[0]) != 0)
-                {
-                    // 終了
-                    break;
-                }
-                else
-                {
-                    // ラベルなし、オペコードは第一引数部
-                    operationCode = term[0];
-                }
+                    if (value.IndexOf(term[0]) == 0)
+                    {
+                        // ラベル名重複チェック
+                        if (Memory.labelList.Count(x => x.Name() == term[0]) != 0)
+                            throw new LabelDuplicationException();
+                        // ラベル追加
+                        Memory.labelList.Add(new Label(term[0], labelAddress));
+                        // オペコードは第二引数部
+                        operationCode = term[1];
+                    }
+                    else if (term[0] == "END" && value.IndexOf(term[0]) != 0)
+                    {
+                        // 終了
+                        notFoundEndLine = false;
+                        break;
+                    }
+                    else
+                    {
+                        // ラベルなし、オペコードは第一引数部
+                        operationCode = term[0];
+                    }
 
-                // ラベルアドレスをオペコード分ずらす
-                labelAddress += OperationCode.addOperationCode(operationCode);
+                    // ラベルアドレスをオペコード分ずらす
+                    labelAddress += OperationCode.addOperationCode(operationCode);
+                }
+                catch (KeyNotFoundException e)
+                {
+                    Error error = new Error("E01", "命令 " + operationCode + " は存在しません。", i + 1);
+                }
+                catch (LabelDuplicationException e)
+                {
+                    Error error = new Error("E22", "命令 " + operationCode + " のラベルはすでに使用されています。", i + 1);
+                }
             }
+
+            if (notFoundEndLine) throw new EndLineNotFoundException();
         }
 
         /// <summary>
@@ -140,7 +173,26 @@ namespace GMC_4
                 }
 
                 // 機械語へ変換
-                OperationCode.compileOperationCode(operationCode, operand);
+                try
+                {
+                    OperationCode.compileOperationCode(operationCode, operand);
+                }
+                catch (ArgumentLackException e)
+                {
+                    Error error = new Error("E02", "命令 " + operationCode + " のオペランドがありません。", i + 1);
+                }
+                catch(ArgumentExcessException e)
+                {
+                    Error error = new Error("E03", "命令 " + operationCode + " のオペランドが過剰です。", i + 1);
+                }
+                catch(ArgumentOutOfRangeException e)
+                {
+                    Error error = new Error("E04", "命令 " + operationCode + " のオペランドが不正です。", i + 1);
+                }
+                catch (InvalidOperationException e)
+                {
+                    Error error = new Error("E21", "命令 " + operationCode + " の指定するラベルは存在しません。", i + 1);
+                }
             }
 
         }

@@ -39,6 +39,9 @@ namespace GMC_4
         }
     }
 
+    /// <summary>
+    /// 引数が不足している例外
+    /// </summary>
     public class ArgumentLackException : ArgumentException
     {
         public ArgumentLackException(string message = "") : base(message)
@@ -46,6 +49,9 @@ namespace GMC_4
         }
     }
 
+    /// <summary>
+    /// 引数が多すぎる例外
+    /// </summary>
     public class ArgumentExcessException : ArgumentException
     {
         public ArgumentExcessException(string message = "") : base(message)
@@ -53,6 +59,9 @@ namespace GMC_4
         }
     }
 
+    /// <summary>
+    /// スタートラインが見つからない例外
+    /// </summary>
     public class StartLineNotFoundException : Exception
     {
         public StartLineNotFoundException(string message = "") : base(message)
@@ -60,6 +69,9 @@ namespace GMC_4
         }
     }
 
+    /// <summary>
+    /// エンドラインが見つからない例外
+    /// </summary>
     public class EndLineNotFoundException : Exception
     {
         public EndLineNotFoundException(string message = "") : base(message)
@@ -67,6 +79,9 @@ namespace GMC_4
         }
     }
 
+    /// <summary>
+    /// ラベルが重複している例外
+    /// </summary>
     public class LabelDuplicationException : Exception
     {
         public LabelDuplicationException(string message = "") : base(message)

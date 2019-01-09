@@ -28,8 +28,9 @@ namespace GMC_4
 
         private void buttonINCR_Click(object sender, EventArgs e)
         {
+            playButtonSound();
             // バッファにデータが入っている=いずれかのボタンが押されたときのみメモリに値をセットする
-            if(Buffer.Flag) Memory.set(Buffer.get(), Address.get());
+            if (Buffer.Flag) Memory.set(Buffer.get(), Address.get());
             Address.increment();
             // アドレス表示LEDとメモリ表示、LEDマトリクスをセットする
             setBinaryLED(Address.get());
@@ -41,6 +42,7 @@ namespace GMC_4
 
         private void buttonNumber_Click(object sender, EventArgs e)
         {
+            playButtonSound();
             // どのボタンが押されたか調べる
             var button = (Button)sender;
             var buttonNumberString = button.Name.Replace("button", "");
@@ -120,6 +122,7 @@ namespace GMC_4
 
         private void assembleButton_Click(object sender, EventArgs e)
         {
+            playButtonSound();
             // すでに記憶された命令をすべてリセットする
             Program.reset();
             // コンパイルを行う
@@ -132,6 +135,7 @@ namespace GMC_4
 
         private void runButton_Click(object sender, EventArgs e)
         {
+            playButtonSound();
             // ステップ実行フラグをリセットしておく
             didStepRun = false;
             // シミュレータを起動する
@@ -146,6 +150,7 @@ namespace GMC_4
 
         private void resetButton_Click(object sender, EventArgs e)
         {
+            playButtonSound();
             // シミュレータを停止する
             stopSimulator();
         }
@@ -190,16 +195,25 @@ namespace GMC_4
 
         private void addressSetButton_Click(object sender, EventArgs e)
         {
-            // アドレスを移動する
-            Address.set(Buffer.getAsAddress());
-            // 移動先アドレスをLED表示する
-            setBinaryLED(Address.get());
-            // 移動先のメモリの中身を表示する
-            setLEDMatrix(Memory.getWord(Address.get()));
+            playButtonSound();
+            try
+            {
+                // アドレスを移動する
+                Address.set(Buffer.getAsAddress());
+                // 移動先アドレスをLED表示する
+                setBinaryLED(Address.get());
+                // 移動先のメモリの中身を表示する
+                setLEDMatrix(Memory.getWord(Address.get()));
+            }
+            catch (ArgumentOutOfRangeException er)
+            {
+                Sound.error();
+            }
         }
 
         private void memoryResetButton_Click(object sender, EventArgs e)
         {
+            playButtonSound();
             stopSimulator();
             Program.reset();
             setMemoryText();
@@ -210,6 +224,7 @@ namespace GMC_4
         
         private void clockSpeedSetButton_Click(object sender, EventArgs e)
         {
+            playButtonSound();
             // Hzをmsに変換する
             var speed = 1.0 / (double)clockSpeed.Value * 1000.0;
             timer1.Interval = (int)speed;
@@ -223,6 +238,7 @@ namespace GMC_4
         private bool didStepRun = false;
         private void stepRunButton_Click(object sender, EventArgs e)
         {
+            playButtonSound();
             // 初回実行ならシミュレータを一旦停止して、アドレスとバッファのリセットを行う
             if (!didStepRun)
             {
@@ -245,6 +261,14 @@ namespace GMC_4
             Address.reset();
             // バッファのリセット
             Buffer.reset();
+        }
+
+        /// <summary>
+        /// ボタンを押したときの音を再生します。
+        /// </summary>
+        private void playButtonSound()
+        {
+            Console.Beep(900, 50);
         }
     }
 }

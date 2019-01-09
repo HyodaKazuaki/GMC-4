@@ -46,10 +46,12 @@ namespace GMC_4
             catch (StartLineNotFoundException e)
             {
                 Error error = new Error("E11", "スタートラインが見つかりません。");
+                return;
             }
             catch (EndLineNotFoundException e)
             {
                 Error error = new Error("E12", "エンドラインが見つかりません。");
+                return;
             }
         }
 
@@ -132,10 +134,12 @@ namespace GMC_4
                 catch (KeyNotFoundException e)
                 {
                     Error error = new Error("E01", "命令 " + operationCode + " は存在しません。", i + 1);
+                    return;
                 }
                 catch (LabelDuplicationException e)
                 {
                     Error error = new Error("E22", "命令 " + operationCode + " のラベルはすでに使用されています。", i + 1);
+                    return;
                 }
             }
 
@@ -190,22 +194,27 @@ namespace GMC_4
                 catch (ArgumentLackException e)
                 {
                     Error error = new Error("E02", "命令 " + operationCode + " のオペランドがありません。", i + 1);
+                    return;
                 }
-                catch(ArgumentExcessException e)
+                catch (ArgumentExcessException e)
                 {
                     Error error = new Error("E03", "命令 " + operationCode + " のオペランドが過剰です。", i + 1);
+                    return;
                 }
-                catch(ArgumentOutOfRangeException e)
+                catch (ArgumentOutOfRangeException e)
                 {
                     Error error = new Error("E04", "命令 " + operationCode + " のオペランドが不正です。", i + 1);
+                    return;
                 }
                 catch (InvalidOperationException e)
                 {
                     Error error = new Error("E21", "命令 " + operationCode + " の指定するラベルは存在しません。", i + 1);
+                    return;
                 }
-                catch(KeyNotFoundException e)
+                catch (KeyNotFoundException e)
                 {
                     Error error = new Error("E01", "命令 " + operationCode + " " + operand + " は存在しません", i + 1);
+                    return;
                 }
             }
 

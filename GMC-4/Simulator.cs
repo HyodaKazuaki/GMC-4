@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace GMC_4
 {
@@ -13,6 +12,12 @@ namespace GMC_4
         /// Form1の参照を受け付ける
         /// </summary>
         private Form1 form1;
+
+        /// <summary>
+        /// タイマー用変数
+        /// </summary>
+        private bool sleepFlag = false;
+        private int timerInterval;
 
         /// <summary>
         /// シミュレータをインスタンス化します。
@@ -28,6 +33,14 @@ namespace GMC_4
         /// </summary>
         public void execute()
         {
+            // タイマーフラグがtrueならフラグをfalseにしてtimerを戻す
+            if (sleepFlag)
+            {
+                form1.timer1.Stop();
+                form1.timer1.Interval = timerInterval;
+                form1.timer1.Start();
+            }
+
             // 1ワード分とってくる
             char word = Memory.getWord(Address.get());
             char tmp;
@@ -193,7 +206,7 @@ namespace GMC_4
         /// <summary>
         /// 拡張命令を実行します。
         /// </summary>
-        private async void extendedInstruction()
+        private void extendedInstruction()
         {
             // 拡張命令の内容を取得
             Address.increment();
@@ -272,7 +285,11 @@ namespace GMC_4
                     break;
                 case 'C':
                     Console.WriteLine("Wait simulation time (Register A + 1) * 0.1 second(s)");
-                    await Task.Delay((Program.HexToInt(Register.A.ToString()) + 1) * 100);
+                    form1.timer1.Stop();
+                    timerInterval = form1.timer1.Interval;
+                    form1.timer1.Interval = Program.HexToInt(Register.A.ToString()) + 1 * 100;
+                    form1.timer1.Start();
+                    sleepFlag = true;
                     Register.Flag = '1';
                     break;
                 case 'D':

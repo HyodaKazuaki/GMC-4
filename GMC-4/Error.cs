@@ -22,6 +22,7 @@ namespace GMC_4
             line = errorLine;
 
             showErrorDialog();
+            Program.reset();
         }
 
         /// <summary>

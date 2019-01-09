@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace GMC_4
 {
@@ -74,17 +75,17 @@ namespace GMC_4
                         break;
                     case '4':
                         Console.WriteLine("Write value where Register A to Data Memory 0x50+0x" + Register.Y.ToString());
-                        Memory.set(Register.A, Program.HexToInt("50") + Convert.ToInt32(Register.Y.ToString(), 16));
+                        Memory.set(Register.A, Program.HexToInt("50") + Program.HexToInt(Register.Y.ToString()));
                         Register.Flag = '1';
                         break;
                     case '5':
                         Console.WriteLine("Read value where Data Memory 0x50+0x" + Register.Y.ToString() + " to Register A");
-                        Register.A = Memory.getWord(Program.HexToInt("50") + Convert.ToInt32(Register.Y.ToString(), 16));
+                        Register.A = Memory.getWord(Program.HexToInt("50") + Program.HexToInt(Register.Y.ToString()));
                         Register.Flag = '1';
                         break;
                     case '6':
                         Console.WriteLine("Write value Register A plus Data Memory 0x50+0x" + Register.Y.ToString() + " to Register A");
-                        value = Convert.ToInt32(Register.A.ToString(), 16) + Convert.ToInt32(Memory.getWord(Program.HexToInt("50") + Convert.ToInt32(Register.Y.ToString(), 16)).ToString(), 16);
+                        value = Program.HexToInt(Register.A.ToString()) + Program.HexToInt(Memory.getWord(Program.HexToInt("50") + Program.HexToInt(Register.Y.ToString())).ToString());
                         if (16 > value)
                         {
                             Register.Flag = '0';
@@ -94,11 +95,11 @@ namespace GMC_4
                             value = value - 16;
                             Register.Flag = '1';
                         }
-                        Register.A = value.ToString("X").ToCharArray()[0];
+                        Register.A = value.ToString("X").Last();
                         break;
                     case '7':
                         Console.WriteLine("Write value Data Memory 0x50+0x" + Register.Y.ToString() + " minus Register A to Register A");
-                        value = Convert.ToInt32(Memory.getWord(Program.HexToInt("50") + Convert.ToInt32(Register.Y.ToString(), 16)).ToString(), 16) - Convert.ToInt32(Register.A.ToString(), 16);
+                        value = Program.HexToInt(Memory.getWord(Program.HexToInt("50") + Program.HexToInt(Register.Y.ToString())).ToString()) - Program.HexToInt(Register.A.ToString());
                         if (value > 0)
                         {
                             Register.Flag = '0';
@@ -108,7 +109,7 @@ namespace GMC_4
                             value = 16 - value;
                             Register.Flag = '1';
                         }
-                        Register.A = value.ToString("X").ToCharArray()[0];
+                        Register.A = value.ToString("X").Last();
                         break;
                     case '8':
                         Console.WriteLine("Read value next Memory to Register A");
@@ -119,7 +120,7 @@ namespace GMC_4
                     case '9':
                         Console.WriteLine("Write value Register A plus next Memory to Register A");
                         Address.increment();
-                        value = Convert.ToInt32(Register.A.ToString(), 16) + Convert.ToInt32(Memory.getWord(Address.get()).ToString(), 16);
+                        value = Program.HexToInt(Register.A.ToString()) + Program.HexToInt(Memory.getWord(Address.get()).ToString());
                         if (16 > value)
                         {
                             Register.Flag = '0';
@@ -129,7 +130,7 @@ namespace GMC_4
                             value = value - 16;
                             Register.Flag = '1';
                         }
-                        Register.A = value.ToString("X").ToCharArray()[0];
+                        Register.A = value.ToString("X").Last();
                         break;
                     case 'A':
                         Console.WriteLine("Read value next Memory to Register Y");
@@ -140,7 +141,7 @@ namespace GMC_4
                     case 'B':
                         Console.WriteLine("Write value Register Y plus next Memory to Register Y");
                         Address.increment();
-                        value = Convert.ToInt32(Register.Y.ToString(), 16) + Convert.ToInt32(Memory.getWord(Address.get()).ToString(), 16);
+                        value = Program.HexToInt(Register.Y.ToString()) + Program.HexToInt(Memory.getWord(Address.get()).ToString());
                         if (16 > value)
                         {
                             Register.Flag = '0';
@@ -150,7 +151,7 @@ namespace GMC_4
                             value = value - 16;
                             Register.Flag = '1';
                         }
-                        Register.Y = value.ToString("X").ToCharArray()[0];
+                        Register.Y = value.ToString("X").Last();
                         break;
                     case 'C':
                         Console.WriteLine("Check Register A equal next Memory");
@@ -165,9 +166,9 @@ namespace GMC_4
                     case 'F':
                         Console.WriteLine("Jump to Address next Memory");
                         Address.increment();
-                        value = Convert.ToInt32(Memory.getWord(Address.get()).ToString(), 16) * 16;
+                        value = Program.HexToInt(Memory.getWord(Address.get()).ToString()) * 16;
                         Address.increment();
-                        value += Convert.ToInt32(Memory.getWord(Address.get()).ToString(), 16);
+                        value += Program.HexToInt(Memory.getWord(Address.get()).ToString());
                         if (Register.Flag == '1')
                         {
                             Address.set(Convert.ToByte(value));
@@ -194,7 +195,7 @@ namespace GMC_4
         /// <summary>
         /// 拡張命令を実行します。
         /// </summary>
-        private void extendedInstruction()
+        private async void extendedInstruction()
         {
             // 拡張命令の内容を取得
             Address.increment();
@@ -205,11 +206,100 @@ namespace GMC_4
                 case '0':
                     Console.WriteLine("Turn off number LED");
                     form1.setLEDMatrix('\0');
+                    Register.Flag = '1';
                     break;
                 case '1':
                     Console.WriteLine("Turn on binary LED potision " + Register.Y.ToString());
-
+                    throw new NotImplementedException();
+                    Register.Flag = '1';
                     break;
+                case '2':
+                    Console.WriteLine("Turn off binary LED potision " + Register.Y.ToString());
+                    throw new NotImplementedException();
+                    Register.Flag = '1';
+                    break;
+                case '4':
+                    Console.WriteLine("Reverse value where Register A");
+                    int value = Program.HexToInt(Register.A.ToString());
+                    value = ~value; // 反転
+                    Register.A = value.ToString("X").Last();
+                    Register.Flag = '1';
+                    break;
+                case '5':
+                    Console.WriteLine("Replace all register");
+                    char tmp = Register.A;
+                    Register.A = Register.A0;
+                    Register.A0 = tmp;
+                    tmp = Register.B;
+                    Register.B = Register.B0;
+                    Register.B0 = tmp;
+                    tmp = Register.Y;
+                    Register.Y = Register.Y0;
+                    Register.Y0 = tmp;
+                    tmp = Register.Z;
+                    Register.Z = Register.Z0;
+                    Register.Z0 = tmp;
+                    Register.Flag = '1';
+                    break;
+                case '6':
+                    value = Program.HexToInt(Register.A.ToString());
+                    Register.Flag = value % 2 == 0 ? '1' : '0';
+                    value = value >> 1;
+                    Register.A = value.ToString("X").Last();
+                    break;
+                case '7':
+                    Console.WriteLine("Play end sound");
+                    Sound.end();
+                    Register.Flag = '1';
+                    break;
+                case '8':
+                    Console.WriteLine("Play error sound");
+                    Sound.error();
+                    Register.Flag = '1';
+                    break;
+                case '9':
+                    Console.WriteLine("Play short beep");
+                    Sound.shortBeep();
+                    Register.Flag = '1';
+                    break;
+                case 'A':
+                    Console.WriteLine("Play long beep");
+                    Sound.longBeep();
+                    Register.Flag = '1';
+                    break;
+                case 'B':
+                    Console.WriteLine("Play sound stage Register A");
+                    throw new NotImplementedException();
+                    Register.Flag = '1';
+                    break;
+                case 'C':
+                    Console.WriteLine("Wait simulation time (Register A + 1) * 0.1 second(s)");
+                    await Task.Delay((Program.HexToInt(Register.A.ToString()) + 1) * 100);
+                    Register.Flag = '1';
+                    break;
+                case 'D':
+                    Console.WriteLine("Turn on binary LED value Data memory");
+                    int upperAddress = Program.HexToInt("5F");
+                    int lowerAddress = Program.HexToInt("5E");
+                    value = Program.HexToInt(Memory.getWord(upperAddress).ToString()) << 4;
+                    value += Program.HexToInt(Memory.getWord(lowerAddress).ToString());
+                    form1.setBinaryLED(value);
+                    Register.Flag = '1';
+                    break;
+                case 'E':
+                    Console.WriteLine("Data Memory minus Register A");
+                    throw new NotImplementedException();
+                    Register.Y = (Program.HexToInt(Register.Y.ToString()) - 1).ToString("X").Last();
+                    Register.Flag = '1';
+                    break;
+                case 'F':
+                    Console.WriteLine("Data Memory plus Register A");
+                    throw new NotImplementedException();
+                    Register.Y = (Program.HexToInt(Register.Y.ToString()) - 1).ToString("X").Last();
+                    Register.Flag = '1';
+                    break;
+                default:
+                    throw new NotImplementedException();
             }
         }
 
@@ -218,7 +308,7 @@ namespace GMC_4
         /// </summary>
         private void error()
         {
-            Console.Beep(800, 1000);
+            Sound.error();
             // アドレスを最終行に移動させる
             Address.set(Address.finalProgramAddress);
         }

@@ -36,7 +36,7 @@ namespace GMC_4
             else
             {
                 Console.WriteLine("Out bounds " + addr);
-                throw new ArgumentException();
+                throw new ArgumentOutOfRangeException();
             }
         }
 

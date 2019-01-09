@@ -22,6 +22,8 @@ namespace GMC_4
             sourceCode = source.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
             // 不要なコメントを除去
             sourceCode = sourceCode.Select(code => removeComment(code)).ToArray();
+            // 小文字を大文字に変換
+            sourceCode = sourceCode.Select(code => code.ToUpperInvariant()).ToArray();
         }
 
         /// <summary>
@@ -44,6 +46,11 @@ namespace GMC_4
             {
                 Error error = new Error("E12", "エンドラインが見つかりません。");
             }
+        }
+
+        private void convertUppercaseLetter()
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
